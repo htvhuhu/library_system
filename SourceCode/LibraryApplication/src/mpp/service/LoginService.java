@@ -9,7 +9,7 @@ public class LoginService extends Service {
 	private LoginDao loginDao = (LoginDao)DataAccessFactory.getDataAccess(LoginDao.class);
 	
 	public Role login(String username, char[] password) {
-		User user = loginDao.getUser(username);
+		User user = loginDao.getAllUser();
 		// implementation
 		
 		return user.getRole();

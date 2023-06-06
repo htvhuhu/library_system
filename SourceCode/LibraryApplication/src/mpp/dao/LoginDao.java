@@ -4,7 +4,7 @@ import mpp.model.User;
 
 public class LoginDao extends DataAccess {
 
-	public User getUser(String userName) {
+	public User getAllUser() {
 		readFromFile(StorageType.USER);
 		
 		return null;
