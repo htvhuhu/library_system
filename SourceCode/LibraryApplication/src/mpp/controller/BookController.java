@@ -32,6 +32,29 @@ public class BookController {
         System.out.println("Checkout successful! Due date: " + record.getDueDate());
     }
 	
+
+    public void printCheckoutRecord(String memberId) {
+        LibraryMember member = bookService.getMember(memberId);
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        List<CheckoutRecord> records = member.getCheckoutRecords();
+        if (records.isEmpty()) {
+            System.out.println("No checkout records found for member " + memberId);
+            return;
+        }
+
+        System.out.printf("%-20s %-20s %-20s%n", "Copy Number", "Checkout Date", "Due Date");
+        for (CheckoutRecord record : records) {
+            System.out.printf("%-20s %-20s %-20s%n", 
+                record.getBookCopy().getBookCopyID(), 
+                record.getCheckoutDate(), 
+                record.getDueDate());
+        }
+    }
+	
 	public void addBook(String isbn, String title, List<Author> authors, int maxCheckoutLength, int numberOfCopies) {
         bookService.addBook(isbn, title, authors, maxCheckoutLength, numberOfCopies);
         System.out.println("Book added successfully!");
