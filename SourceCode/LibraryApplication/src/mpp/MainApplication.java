@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 
 import mpp.view.LoginWindow;
+import mpp.view.MainWindow;
 
 public class MainApplication {
 
@@ -15,7 +16,7 @@ public class MainApplication {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginWindow window = new LoginWindow();
+					MainWindow window = new MainWindow();
 					setWindowCentered(window);
 					window.setVisible(true);
 					
