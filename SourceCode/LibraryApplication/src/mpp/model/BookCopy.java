@@ -1,8 +1,28 @@
 package mpp.model;
 
+import java.time.LocalDate;
+
 public class BookCopy {
 	private int bookCopyID;
 	private boolean isAvailable;
+	private String borrowerId; // library member id
+	public String getBorrowerId() {
+		return borrowerId;
+	}
+
+	public void setBorrowerId(String borrowerId) {
+		this.borrowerId = borrowerId;
+	}
+
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	private LocalDate dueDate;
 
 	public boolean isAvailable() {
 		return isAvailable;

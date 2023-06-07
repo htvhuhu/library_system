@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import mpp.model.Author;
+import mpp.model.BookCopy;
 import mpp.model.CheckoutRecord;
 import mpp.model.LibraryMember;
 import mpp.service.BookService;
@@ -55,6 +56,15 @@ public class BookController {
         }
     }
 	
+    public List<BookCopy> searchBookCopies(String isbn) {
+        return bookService.searchBookCopies(isbn);
+    }
+
+    public boolean isCopyOverdue(BookCopy copy) {
+        LocalDate today = LocalDate.now();
+        return today.isAfter(copy.getDueDate()) && copy.getBorrowerId() != null;
+    }
+    
 	public void addBook(String isbn, String title, List<Author> authors, int maxCheckoutLength, int numberOfCopies) {
         bookService.addBook(isbn, title, authors, maxCheckoutLength, numberOfCopies);
         System.out.println("Book added successfully!");
