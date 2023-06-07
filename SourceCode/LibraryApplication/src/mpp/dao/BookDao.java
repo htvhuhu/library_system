@@ -9,7 +9,7 @@ import mpp.model.Book;
 public class BookDao extends DataAccess {
 	private final StorageType storageType = StorageType.BOOK;
 
-    public void saveBook(Book book) {
+    public void addBook(Book book) {
         books.put(book.getIsbn(), book);
         this.saveToFile(this.storageType, books);
         this.loadBooks();
@@ -24,7 +24,7 @@ public class BookDao extends DataAccess {
     }
 
     public void updateBook(Book book) {
-        saveBook(book);  // In this simple implementation, save and update do the same thing.
+        //addBook(book);
     }
 
     public void deleteBook(String isbn) {
