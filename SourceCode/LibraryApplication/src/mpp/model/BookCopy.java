@@ -1,8 +1,9 @@
 package mpp.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class BookCopy {
+public class BookCopy implements Serializable{
 	private int bookCopyID;
 	private boolean isAvailable;
 	private String borrowerId; // library member id

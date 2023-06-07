@@ -1,8 +1,9 @@
 package mpp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable{
 	public Book(String isbn, String title, List<Author> authors, int maxCheckoutLength, List<BookCopy> copies) {
 		this.isbn = isbn;
 		this.title = title;
