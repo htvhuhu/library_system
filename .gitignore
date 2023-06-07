@@ -1,1 +1,12 @@
 bin
+SourceCode/LibraryApplication/.classpath
+SourceCode/ProjectSwing_StartupCode/.DS_Store
+SourceCode/ProjectSwing_StartupCode/src/.DS_Store
+SourceCode/ProjectSwing_StartupCode/src/dataaccess/DataAccessFacade.java
+SourceCode/ProjectSwing_StartupCode/src/storage/BOOKS
+SourceCode/ProjectSwing_StartupCode/src/storage/MEMBERS
+SourceCode/ProjectSwing_StartupCode/src/storage/USERS
+SourceCode/ProjectSwing_StartupCode/storage/BOOKS
+SourceCode/ProjectSwing_StartupCode/storage/MEMBERS
+SourceCode/ProjectSwing_StartupCode/storage/USERS
+*.java

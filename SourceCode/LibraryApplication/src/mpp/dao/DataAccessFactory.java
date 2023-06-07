@@ -13,6 +13,7 @@ public class DataAccessFactory {
 	static {
 		map.put(LoginDao.class, new LoginDao());
 		map.put(BookDao.class, new BookDao());
+		map.put(UserDao.class, new UserDao());
 	}
 
 	public static DataAccess getDataAccess(Class<? extends DataAccess> daoClass) {
