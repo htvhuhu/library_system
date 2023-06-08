@@ -1,11 +1,13 @@
 package mpp.view.librarymember;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.*;
@@ -55,12 +57,17 @@ public class FormPanel extends JPanel{
 	private JRadioButton femaleRadio;
 	private ButtonGroup genderGroup;
 	
+	private JLabel requireLable;
+	
 	public FormPanel(JDialog _parent) {
 		Dimension dim = getPreferredSize();
 		dim.width = 250;
 		setPreferredSize(dim);
 		
-		numberLabel = new JLabel("Number: ");
+		requireLable = new JLabel("*");
+		requireLable.setForeground(Color.red);
+		
+		numberLabel = new JLabel("Number: *");
 		firstNameLabel = new JLabel("First Name: ");
 		lastNameLabel = new JLabel("Last Name: ");
 		phoneLabel = new JLabel("Phone: ");
@@ -94,6 +101,34 @@ public class FormPanel extends JPanel{
 		
 		// Set up mnemomics
 		okBtn.setMnemonic(KeyEvent.VK_O);
+		
+		phoneField.addKeyListener(new KeyAdapter() {
+	         public void keyPressed(KeyEvent ke) {
+	            String value = phoneField.getText();
+	            int l = value.length();
+	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
+	            	phoneField.setEditable(true);
+	               //label.setText("");
+	            } else {
+	            	phoneField.setEditable(false);
+	               //label.setText("* Enter only numeric digits(0-9)");
+	            }
+	         }
+	      });
+		
+		zipField.addKeyListener(new KeyAdapter() {
+	         public void keyPressed(KeyEvent ke) {
+	            String value = zipField.getText();
+	            int l = value.length();
+	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
+	            	zipField.setEditable(true);
+	               
+	            } else {
+	            	zipField.setEditable(false);
+	               
+	            }
+	         }
+	      });
 		
 		//nameLabel.setDisplayedMnemonic(KeyEvent.VK_N);
 		//nameLabel.setLabelFor(nameField);
@@ -221,12 +256,15 @@ public class FormPanel extends JPanel{
 		gc.anchor = GridBagConstraints.LINE_END;
 		gc.insets = new Insets(0, 0, 0, 5);
 		add(numberLabel, gc);
+		
 
 		gc.gridx = 1;
 		gc.gridy = 0;
 		gc.insets = new Insets(0, 0, 0, 0);
 		gc.anchor = GridBagConstraints.LINE_START;
 		add(numberField, gc);
+		
+		
 		
 		// ////////// First row ///////////////////////////////////
 				gc.gridy++;
