@@ -3,7 +3,9 @@ package mpp.dao;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import mpp.model.Book;
 import mpp.model.Book;
 
 public class BookDao extends DataAccess {
@@ -53,4 +55,15 @@ public class BookDao extends DataAccess {
     private BookDao(){
     	loadBooks();
     }
+    
+	@SuppressWarnings("unchecked")
+	public Map<String, Book> getAllBook() {
+		return (Map<String, Book>)readFromFile(StorageType.BOOK);
+	}
+	
+	public void saveBooks(List<Book> bookList) {
+		Map<String, Book> books = new HashMap<>();
+		bookList.forEach(book -> books.put(book.getIsbn(), book));
+		saveToFile(StorageType.BOOK, books);
+	}
 }

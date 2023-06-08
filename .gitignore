@@ -1,3 +1,5 @@
 bin
 SourceCode/LibraryApplication/.classpath
 
+.DS_Store
+SourceCode/LibraryApplication/.settings/org.eclipse.jdt.core.prefs
