@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Book implements Serializable{
+	private static final long serialVersionUID = 1L;
 	public Book(String isbn, String title, List<Author> authors, int maxCheckoutLength, List<BookCopy> copies) {
 		this.isbn = isbn;
 		this.title = title;
@@ -46,4 +47,10 @@ public class Book implements Serializable{
 	private List<Author> authors;
 	private int maxCheckoutLength;
 	private List<BookCopy> copies;
+	
+	@Override
+	public String toString() {
+		return "Book [isbn=" + isbn + ", title=" + title + ", authors=" + authors + ", maxCheckoutLength="
+				+ maxCheckoutLength + ", copies=" + copies + "]";
+	}
 }
