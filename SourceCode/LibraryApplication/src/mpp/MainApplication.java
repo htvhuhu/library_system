@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
-import mpp.view.LoginWindow;
 import mpp.view.MainWindow;
 
 public class MainApplication {
