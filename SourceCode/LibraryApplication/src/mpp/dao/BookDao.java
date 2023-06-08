@@ -3,6 +3,7 @@ package mpp.dao;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import mpp.model.Book;
 
@@ -34,7 +35,13 @@ public class BookDao extends DataAccess {
     }
 
     private void loadBooks() {
-        this.books = (Map<String, Book>)this.readFromFile(this.storageType);
+    	try {
+            this.books = (Map<String, Book>)this.readFromFile(this.storageType);
+            this.books = new HashMap<String, Book>();
+		} catch (Exception e) {
+			// TODO: handle exception
+			this.books = new HashMap<String, Book>();
+		}
     }
     
     private Map<String, Book> books;

@@ -15,6 +15,8 @@ public class PrintCheckoutRecordWindow {
 		
 		JLabel lblTitle = new JLabel("Print checkout record");
 		mainPanel.add(lblTitle);
+		
+		
 	}
 	
 	public JPanel getMainPanel() {

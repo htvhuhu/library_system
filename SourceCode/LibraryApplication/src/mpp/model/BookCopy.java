@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class BookCopy implements Serializable{
+	private static final long serialVersionUID = 2009215174275309181L;
 	private int bookCopyID;
 	private boolean isAvailable;
 	private String borrowerId; // library member id
+	private LocalDate dueDate;
+
 	public String getBorrowerId() {
 		return borrowerId;
 	}
@@ -23,15 +26,8 @@ public class BookCopy implements Serializable{
 		this.dueDate = dueDate;
 	}
 
-	private LocalDate dueDate;
-
 	public boolean isAvailable() {
 		return isAvailable;
-	}
-
-	public BookCopy(int bookCopyID, boolean isAvailable) {
-		this.bookCopyID = bookCopyID;
-		this.isAvailable = isAvailable;
 	}
 
 	public void setAvailable(boolean isAvailable) {
@@ -46,4 +42,10 @@ public class BookCopy implements Serializable{
 		this.bookCopyID = bookCopyID;
 		
 	}
+
+	public BookCopy(int bookCopyID, boolean isAvailable) {
+		this.bookCopyID = bookCopyID;
+		this.isAvailable = isAvailable;
+	}
+
 }

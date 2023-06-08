@@ -1,8 +1,10 @@
 package mpp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable{
+	private static final long serialVersionUID = 2009215174275387181L;
 	private String isbn;
 	private String title;
 	private List<Author> authors;

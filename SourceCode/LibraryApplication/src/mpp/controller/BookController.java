@@ -13,24 +13,22 @@ import mpp.service.ServiceFactory;
 public class BookController {
 	private BookService bookService = (BookService) ServiceFactory.getService(BookService.class);
 	
-	public void checkoutBook(String memberId, String isbn) {
+	public String  checkoutBook(String memberId, String isbn) {
         LibraryMember member = bookService.getMember(memberId);
         if (member == null) {
-            System.out.println("Member not found.");
-            return;
+            return "Member not found.";
         }
 
         var copy = bookService.getAvailableCopy(isbn);
         if (copy == null) {
-            System.out.println("Book not found or no available copies.");
-            return;
+            return "Book not found or no available copies.";
         }
 
         CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(14));
         member.getCheckoutRecords().add(record);
         copy.setAvailable(false);
 
-        System.out.println("Checkout successful! Due date: " + record.getDueDate());
+        return "Checkout successful! Due date: " + record.getDueDate();
     }
 	
 

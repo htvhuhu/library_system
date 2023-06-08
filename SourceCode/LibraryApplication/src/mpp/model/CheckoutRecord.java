@@ -2,6 +2,7 @@ package mpp.model;
 import java.time.LocalDate;
 
 public class CheckoutRecord {
+	private static final long serialVersionUID = 2007775174275387181L;
     public BookCopy getBookCopy() {
 		return bookCopy;
 	}
