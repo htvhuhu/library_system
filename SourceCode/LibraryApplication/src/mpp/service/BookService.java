@@ -20,12 +20,24 @@ public class BookService extends Service{
     }
 
     public BookCopy getAvailableCopy(String isbn) {
-        return books.stream()
-                .filter(book -> book.getIsbn().equals(isbn))
-                .flatMap(book -> book.getCopies().stream())
+    	var bookCopies = this.searchBookCopies(isbn);
+        if (bookCopies == null) {
+            return null;
+        }
+    	return bookCopies.stream()
                 .filter(BookCopy::isAvailable)
                 .findFirst()
                 .orElse(null);
+    }
+    
+    public List<BookCopy> searchBookCopies(String isbn) {
+        var bookCopies = books.stream()
+                .filter(book -> book.getIsbn().equals(isbn))
+                .flatMap(book -> book.getCopies().stream());
+        if (bookCopies == null) {
+            return null;
+        }
+        return bookCopies.toList();
     }
     
     public Book getBook(String isbn) {
@@ -34,7 +46,7 @@ public class BookService extends Service{
                 .findFirst()
                 .orElse(null);
     }
-
+    
     public void addCopyToBook(String isbn) {
         Book book = getBook(isbn);
         if (book == null) {
