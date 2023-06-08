@@ -17,8 +17,14 @@ public abstract class DataAccess {
 		Object retVal = null;
 		try {
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
-			in = new ObjectInputStream(Files.newInputStream(path));
-			retVal = in.readObject();
+			String filePathString = OUTPUT_DIR + File.separator + type.toString();
+			File f = new File(filePathString);
+			if (f.exists() && !f.isDirectory()) {
+				in = new ObjectInputStream(Files.newInputStream(path));
+				retVal = in.readObject();
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
