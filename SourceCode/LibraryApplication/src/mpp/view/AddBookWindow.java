@@ -27,23 +27,7 @@ public class AddBookWindow {
 		
 		JLabel lblTitle = new JLabel("Add book");
 		mainPanel.add(lblTitle, "2, 2, left, top");
-		
-		JButton btnAddBookButton = new JButton("New button");
-		btnAddBookButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Author author = new Author();
-				author.setFirstName("Van");
-				author.setLastName("Cao");
-				
-				List<Author> authors = new ArrayList<>();
-				authors.add(author);
 
-				Book book = new Book("isbn01", "Gone With The Wind", authors, 10, new ArrayList<>());
-				bookController.addBook(null, null, authors, 0, 0);
-			}
-		});
-		mainPanel.add(btnAddBookButton, "2, 16");
 	}
 	
 	public JPanel getMainPanel() {
