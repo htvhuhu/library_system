@@ -12,7 +12,7 @@ public abstract class DataAccess {
 
 	public static final String OUTPUT_DIR = System.getProperty("user.dir") + File.separator + "storage";
 
-	Object readFromFile(StorageType type) {
+	public Object readFromFile(StorageType type) {
 		ObjectInputStream in = null;
 		Object retVal = null;
 		try {
@@ -38,7 +38,7 @@ public abstract class DataAccess {
 		return retVal;
 	}
 	
-	void saveToFile(StorageType type, Object obj) {
+	public  void saveToFile(StorageType type, Object obj) {
 	    ObjectOutputStream out = null;
 	    try {
 	        Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());

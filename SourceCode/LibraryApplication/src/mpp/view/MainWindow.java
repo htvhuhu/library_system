@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import mpp.constant.Functions;
 import mpp.model.ListItem;
 import mpp.model.Role;
+import mpp.view.librarymember.LibraryMemberList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JSplitPane;
@@ -84,7 +85,8 @@ public class MainWindow extends JFrame {
         // Add Library Member Window
         AddLibraryMemberWindow addLibraryMemberWindow = new AddLibraryMemberWindow();
         JPanel addLibraryMemberPanel = addLibraryMemberWindow.getMainPanel();
-
+        
+        LibraryMemberList member = new LibraryMemberList(this);
         // Add Book Window
         AddBookWindow addBookWindow = new AddBookWindow();
         JPanel addBookPanel = addBookWindow.getMainPanel();
@@ -99,7 +101,7 @@ public class MainWindow extends JFrame {
         cards.add(searchBookPanel, searchBookItem.getItemName());
         cards.add(printCheckoutRecordPanel, printCheckoutRecordItem.getItemName());
         // Administrator
-        cards.add(addLibraryMemberPanel, addMemberItem.getItemName());
+        cards.add(member, addMemberItem.getItemName());
         cards.add(addBookPanel, addBookItem.getItemName());
         cards.add(addBookCopyPanel, addBookCopyItem.getItemName());
         
