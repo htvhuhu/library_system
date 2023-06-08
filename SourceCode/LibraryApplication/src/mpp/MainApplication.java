@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
+import mpp.model.LibraryMember;
 import mpp.view.LoginWindow;
+import mpp.view.librarymember.LibraryMemberList;
 
 public class MainApplication {
 
@@ -15,7 +17,7 @@ public class MainApplication {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginWindow window = new LoginWindow();
+					LibraryMemberList window = new LibraryMemberList();
 					setWindowCentered(window);
 					window.setVisible(true);
 					
