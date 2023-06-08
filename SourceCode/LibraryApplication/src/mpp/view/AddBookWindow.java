@@ -2,15 +2,11 @@ package mpp.view;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 import mpp.controller.BookController;
 import mpp.model.Author;
 import mpp.model.Book;
 
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,26 +24,6 @@ public class AddBookWindow {
 
 	private void setupUI() {
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("194px"),
-				ColumnSpec.decode("61px"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("16px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblTitle = new JLabel("Add book");
 		mainPanel.add(lblTitle, "2, 2, left, top");
