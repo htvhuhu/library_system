@@ -59,5 +59,7 @@ public class Address implements Serializable {
 	}
 
 	
-	
+	public String toString() {
+		return this.street + " " + this.city + " " + this.state;
+	}
 }

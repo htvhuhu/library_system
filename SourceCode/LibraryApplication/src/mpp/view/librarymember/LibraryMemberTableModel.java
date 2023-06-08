@@ -16,7 +16,7 @@ public class LibraryMemberTableModel extends AbstractTableModel {
 
 	private List<LibraryMember> db;
 	
-	private String[] colNames = {"ID", "Name", "First Name", "Last Name", "Phone Number", "Address"};
+	private String[] colNames = {"ID",  "Last Name", "First Name", "Phone Number", "Address"};
 	
 	public LibraryMemberTableModel() {
 	}
@@ -37,7 +37,7 @@ public class LibraryMemberTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 6;
+		return 5;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class LibraryMemberTableModel extends AbstractTableModel {
 		case 3:
 			return member.getPhoneNumber();
 		case 4:
-			return member.getAddress();
+			return member.getAddressString();
 		
 		}
 		

@@ -11,7 +11,7 @@ public class Person implements Serializable {
 	
 	public Person()
 	{
-		
+		address = new Address();
 	}
 	
 	public Person(String firstName, String lastName, String phoneNumber, Address address) {
@@ -57,6 +57,8 @@ public class Person implements Serializable {
 		return serialVersionUID;
 	}
 
-	
+	public String getAddressString() {
+		return this.address.toString();
+	}
 	
 }

@@ -231,11 +231,15 @@ public class FormPanel extends JPanel{
 		lastNameField.setText(data.getLastName());
 		phoneField.setText(data.getPhoneNumber());
 		
-		streetField.setText(data.getAddress().getStreet());
-		stateField.setText(data.getAddress().getState());
-		zipField.setText(data.getAddress().getZip());
-		cityField.setText(data.getAddress().getCity());
-		isUpdate = true;
+		if (data.getAddress() != null)
+		{
+			streetField.setText(data.getAddress().getStreet());
+			stateField.setText(data.getAddress().getState());
+			zipField.setText(data.getAddress().getZip());
+			cityField.setText(data.getAddress().getCity());
+			isUpdate = true;
+		}
+		
 	}
 	
 	public void clearField() {

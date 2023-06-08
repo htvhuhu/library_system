@@ -31,7 +31,8 @@ public class MemberService extends Service{
 	public void deleteMember(String number)
 	{
 		LibraryMember member = getMember(number);
-		members.remove(member);
+		if (member != null)
+			members.remove(member);
 	}
 	
 	public void updateMember(LibraryMember member)
@@ -47,10 +48,16 @@ public class MemberService extends Service{
 	
 	public LibraryMember getMember( String number )
 	{
-		return members.stream()
+		/*return members.stream()
                 .filter(member -> member.getMemberId().equals(number))
                 .findFirst()
-                .orElse(null);
+                .orElse(null);*/
+		for(LibraryMember mem : members)
+		{
+			if (mem.getMemberId().equals(number) )
+				return mem;
+		}
+		return null;
 	}
 
 	public List<LibraryMember> getMembers() {
