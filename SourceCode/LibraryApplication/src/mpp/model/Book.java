@@ -3,6 +3,12 @@ package mpp.model;
 import java.util.List;
 
 public class Book {
+	private String isbn;
+	private String title;
+	private List<Author> authors;
+	private int maxCheckoutLength;
+	private List<BookCopy> copies;
+	
 	public Book(String isbn, String title, List<Author> authors, int maxCheckoutLength, List<BookCopy> copies) {
 		this.isbn = isbn;
 		this.title = title;
@@ -10,7 +16,6 @@ public class Book {
 		this.maxCheckoutLength = maxCheckoutLength;
 		this.copies = copies;
 	}
-	private String isbn;
 	public String getIsbn() {
 		return isbn;
 	}
@@ -41,8 +46,5 @@ public class Book {
 	public void setCopies(List<BookCopy> copies) {
 		this.copies = copies;
 	}
-	private String title;
-	private List<Author> authors;
-	private int maxCheckoutLength;
-	private List<BookCopy> copies;
+	
 }

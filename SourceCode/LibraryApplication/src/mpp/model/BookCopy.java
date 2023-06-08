@@ -1,6 +1,7 @@
 package mpp.model;
 
 public class BookCopy {
+	private Book book;
 	private int bookCopyID;
 	private boolean isAvailable;
 
