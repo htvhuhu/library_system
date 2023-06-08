@@ -5,9 +5,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import mpp.controller.LoginController;
+import mpp.exception.LoginException;
 import mpp.model.Role;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -35,9 +38,17 @@ public class LoginWindow extends JFrame implements ActionListener {
 		
 		btnLogin.addActionListener(e -> login(tfUserName.getText().trim(), passwordField.getPassword()));
 	}
-	
+	/**
+	 * Login function
+	 */
 	private void login(String userName, char[] password) {
-		Role role = loginController.login(userName, password);
+		if (userName.length() > 0 && password.length > 0) {
+			try {
+				Role role = loginController.login(userName, password);
+			} catch (LoginException e) {
+				JOptionPane.showMessageDialog(this, e.getMessage());
+			}
+		}
 	}
 
 	/**
