@@ -37,7 +37,7 @@ public class PrintCheckoutRecordWindow {
 		setupUI();
 	}
 
-	private void loadTable(String memberId) {
+	public void loadTable(String memberId) {
 		this.libraryMembers = memberId == null || memberId.isEmpty() ? bookController.getAllMembers() : bookController.getMember(memberId);
 		
 		
