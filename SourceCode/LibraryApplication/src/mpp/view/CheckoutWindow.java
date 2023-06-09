@@ -20,7 +20,6 @@ public class CheckoutWindow {
 	JPanel mainPanel;
 	JTextField txtMemberId;
 	JTextField txtISBN;
-	private JTextField txtBorrowerID;
 
 	public CheckoutWindow() {
 		setupUI();
@@ -82,32 +81,16 @@ public class CheckoutWindow {
 			public void actionPerformed(ActionEvent e) {
 				String memberId = txtMemberId.getText();
                 String isbn = txtISBN.getText();
-                String borrowerID = txtBorrowerID.getText();
                 
-                var result = bookController.checkoutBook(memberId, isbn, borrowerID);
+                var result = bookController.checkoutBook(memberId, isbn);
                 JOptionPane.showMessageDialog(mainPanel,result);
 			}
 		});
 		
-		JLabel lblNewLabel_2 = new JLabel("Borrower ID:");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 3;
-		mainPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		txtBorrowerID = new JTextField();
-		GridBagConstraints gbc_txtBorrowerID = new GridBagConstraints();
-		gbc_txtBorrowerID.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBorrowerID.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtBorrowerID.gridx = 1;
-		gbc_txtBorrowerID.gridy = 3;
-		mainPanel.add(txtBorrowerID, gbc_txtBorrowerID);
-		txtBorrowerID.setColumns(10);
 		GridBagConstraints gbc_btnCheckout = new GridBagConstraints();
+		gbc_btnCheckout.insets = new Insets(0, 0, 5, 0);
 		gbc_btnCheckout.gridx = 1;
-		gbc_btnCheckout.gridy = 4;
+		gbc_btnCheckout.gridy = 3;
 		mainPanel.add(btnCheckout, gbc_btnCheckout);
 	}
 

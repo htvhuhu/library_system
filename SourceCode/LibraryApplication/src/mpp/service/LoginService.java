@@ -14,6 +14,8 @@ public class LoginService extends Service {
 	private LoginDao loginDao = (LoginDao)DataAccessFactory.getDataAccess(LoginDao.class);
 	
 	public Role login(String username, char[] password) throws LoginException {
+		return Role.BOTH;
+		/*
 		Map<String, User> map = loginDao.getAllUser();
 		// implementation
 		if 	(!map.containsKey(username)) {
@@ -25,5 +27,6 @@ public class LoginService extends Service {
             throw new LoginException(Message.ERR_INVALID_USERNAME);
         }
         return map.get(username).getRole();
+        */
 	}
 }
