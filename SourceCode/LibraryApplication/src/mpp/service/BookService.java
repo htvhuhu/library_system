@@ -80,11 +80,15 @@ public class BookService extends Service{
         }
         int newCopyNumber = book.getCopies().size() + 1;
         book.getCopies().add(new BookCopy(newCopyNumber, true,book));
+        
+        //Update after add copy
+        bookDao.addBook(book);
     }
     
     public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
         var book = new Book(isbn, title, maxCheckoutLength, authors);
         books.add(book);
+        bookDao.addBook(book);
     }
     
     public void addBook(Book book) {
