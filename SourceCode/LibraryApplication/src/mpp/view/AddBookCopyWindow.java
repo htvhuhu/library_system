@@ -93,7 +93,7 @@ public class AddBookCopyWindow {
         // Add columns to the model
         model.addColumn("ISBN");
         model.addColumn("Title");
-        model.addColumn("Authors");
+        //model.addColumn("Authors");
         model.addColumn("Max Checkout");
         model.addColumn("Number of Copies");
 
@@ -104,7 +104,7 @@ public class AddBookCopyWindow {
         	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
         	Book book = entry.getValue();
         	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
-            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), String.join(",", authorNames), book.getMaxCheckoutLength(), book.getCopies().size()});
+            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), book.getMaxCheckoutLength(), book.getCopies().size()});
         }
 //		
 		
@@ -131,7 +131,8 @@ public class AddBookCopyWindow {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				bookController.addCopy(selectedValue);
-				copyModel.fireTableDataChanged();
+				//copyModel.fireTableDataChanged();
+				fillCopyBookTable();
 			}
 		});
 		GridBagConstraints gbc_btnCopy = new GridBagConstraints();
@@ -154,23 +155,27 @@ public class AddBookCopyWindow {
                     // Do something with the selected data
                     selectedValue = tblBook.getValueAt(selectedRow, 0).toString();
                     System.out.println("Selected value: " + selectedValue);
-                    Map<String, Book> books = bookController.getAllBooks();
-                    Book book = books.get(selectedValue);
-                    if (book != null) {
-                    	List<BookCopy> copyList = book.getCopies();
-                    	if (!copyList.isEmpty()) {
-                    		System.out.println("copy list :" + copyList.size());
-                            DefaultTableModel model = (DefaultTableModel) tbCopy.getModel();
-                            model.setRowCount(0);
-                            for (BookCopy copy : copyList) {
-                                Object[] row = {copy.getBookCopyID(), copy.isAvailable()};
-                                model.addRow(row);
-                            }
-                    	}
-                    }
+                    fillCopyBookTable();
                 }
             }
         });
+	}
+	
+	private void fillCopyBookTable() {
+		Map<String, Book> books = bookController.getAllBooks();
+		Book book = books.get(selectedValue);
+		if (book != null) {
+			List<BookCopy> copyList = book.getCopies();
+			if (!copyList.isEmpty()) {
+				System.out.println("copy list :" + copyList.size());
+		        DefaultTableModel model = (DefaultTableModel) tbCopy.getModel();
+		        model.setRowCount(0);
+		        for (BookCopy copy : copyList) {
+		            Object[] row = {copy.getBookCopyID(), copy.isAvailable()};
+		            model.addRow(row);
+		        }
+			}
+		}
 	}
 	
 	private void fillBookTableData(Map<String, Book> tableData) {
