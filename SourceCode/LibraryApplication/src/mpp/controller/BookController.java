@@ -17,6 +17,10 @@ public class BookController {
 	private BookService bookService = (BookService) ServiceFactory.getService(BookService.class);
 	private MemberService memberService = new MemberService();
 	
+
+	public List<LibraryMember> getAllMembers() {
+		return memberService.getMembers();
+	}
 	
 	public String  checkoutBook(String memberId, String isbn) {
         LibraryMember member = memberService.getMember(memberId);
@@ -40,14 +44,16 @@ public class BookController {
     }
 	
 
-    public void printCheckoutRecord(String memberId) {
+    public List<CheckoutRecord> getCheckoutRecord(String memberId) {
         LibraryMember member = memberService.getMember(memberId);
         if (member == null) {
             System.out.println("Member not found.");
-            return;
+            return null;
         }
 
         List<CheckoutRecord> records = member.getCheckoutRecords();
+        return records;
+        /*
         if (records.isEmpty()) {
             System.out.println("No checkout records found for member " + memberId);
             return;
@@ -59,11 +65,15 @@ public class BookController {
                 record.getBookCopy().getBookCopyID(), 
                 record.getCheckoutDate(), 
                 record.getDueDate());
-        }
+        }*/
     }
 	
     public List<BookCopy> searchBookCopies(String isbn) {
         return bookService.searchBookCopies(isbn);
+    }
+    
+    public Book searchBook(String isbn) {
+        return bookService.searchBook(isbn);
     }
 
     public boolean isCopyOverdue(BookCopy copy) {
