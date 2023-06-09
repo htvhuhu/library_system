@@ -26,10 +26,10 @@ public class PrintCheckoutRecordWindow {
 	BookController bookController = new BookController();
 	JPanel mainPanel;
 	JTextField txtMemberId;
-	private static List<BookCopy> bookCopies;
-	static JTable bookTable;
+	private List<BookCopy> bookCopies;
+	JTable bookTable;
 	private List<LibraryMember> libraryMembers;
-	static List<CheckoutRecord> checkoutRecords;
+	List<CheckoutRecord> checkoutRecords;
 
 	public PrintCheckoutRecordWindow() {
 		bookTable = new JTable(new BookTableModel(this.bookCopies, checkoutRecords));
@@ -37,7 +37,7 @@ public class PrintCheckoutRecordWindow {
 		setupUI();
 	}
 
-	private void loadTable(String memberId) {
+	public void loadTable(String memberId) {
 		this.libraryMembers = memberId == null || memberId.isEmpty() ? bookController.getAllMembers() : bookController.getMember(memberId);
 		
 		
@@ -51,15 +51,6 @@ public class PrintCheckoutRecordWindow {
 
 		BookTableModel model = (BookTableModel) this.bookTable.getModel();
 		model.updateBooks(this.bookCopies, this.checkoutRecords);
-		model.fireTableDataChanged();
-	}
-	
-	public static void loadTable(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
-		checkoutRecords = checkoutRecords;
-		bookCopies = bookCopies;
-		
-		BookTableModel model = (BookTableModel) bookTable.getModel();
-		model.updateBooks(bookCopies, checkoutRecords);
 		model.fireTableDataChanged();
 	}
 	

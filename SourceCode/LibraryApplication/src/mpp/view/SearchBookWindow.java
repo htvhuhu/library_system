@@ -17,6 +17,7 @@ import mpp.controller.BookController;
 import mpp.controller.MemberController;
 import mpp.model.Book;
 import mpp.model.BookCopy;
+import mpp.model.BookTableModel;
 import mpp.model.SearchBookTableModel;
 import mpp.model.LibraryMember;
 
@@ -43,6 +44,17 @@ public class SearchBookWindow {
 		model.updateBooks(this.bookCopies);
 		
 		setupUI();
+	}
+	
+	public void loadTable(String memberId) {
+		bookCopies = bookController.getAllBookCopies();
+		this.libraryMembers = bookController.getAllMembers();
+		var checkoutRecords = this.libraryMembers.stream()
+        		.filter(lm -> lm.getCheckoutRecords() != null)
+        		.flatMap(lm-> lm.getCheckoutRecords().stream()).toList();
+
+		SearchBookTableModel model = (SearchBookTableModel) bookTable.getModel();
+		model.updateBooks(this.bookCopies);
 	}
 	
 	private void setupUI() {
