@@ -70,5 +70,6 @@ public class BookDao extends DataAccess {
 		Map<String, Book> books = new HashMap<>();
 		bookList.forEach(book -> books.put(book.getIsbn(), book));
 		saveToFile(StorageType.BOOK, books);
+		loadBooks();
 	}
 }

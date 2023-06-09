@@ -17,7 +17,7 @@ import mpp.controller.BookController;
 import mpp.controller.MemberController;
 import mpp.model.Book;
 import mpp.model.BookCopy;
-import mpp.model.BookTableModel;
+import mpp.model.SearchBookTableModel;
 import mpp.model.LibraryMember;
 
 import javax.swing.JButton;
@@ -33,10 +33,13 @@ public class SearchBookWindow {
 	private List<LibraryMember> libraryMembers;
 	
 	public SearchBookWindow() {
-		bookCopies = bookController.searchBookCopies(null);
+		bookCopies = bookController.getAllBookCopies();
 		this.libraryMembers = bookController.getAllMembers();
-		bookTable = new JTable(new BookTableModel(this.bookCopies, this.libraryMembers));
-		BookTableModel model = (BookTableModel) bookTable.getModel();
+		var checkoutRecords = this.libraryMembers.stream()
+        		.filter(lm -> lm.getCheckoutRecords() != null)
+        		.flatMap(lm-> lm.getCheckoutRecords().stream()).toList();
+		bookTable = new JTable(new SearchBookTableModel(this.bookCopies, checkoutRecords));
+		SearchBookTableModel model = (SearchBookTableModel) bookTable.getModel();
 		model.updateBooks(this.bookCopies);
 		
 		setupUI();
@@ -107,7 +110,7 @@ public class SearchBookWindow {
 				bookCopyList.add(new BookCopy(4, true, book));
 				*/
 				
-				BookTableModel model = (BookTableModel) bookTable.getModel();
+				SearchBookTableModel model = (SearchBookTableModel) bookTable.getModel();
 				model.updateBooks(bookCopyList);
 				
 			}

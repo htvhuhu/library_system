@@ -1,12 +1,13 @@
 package mpp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryMember extends Person implements Serializable {
 	private static final long serialVersionUID = 2039215174175387181L;
 	private String memberId;
-	private List<CheckoutRecord> checkoutRecords;
+	private List<CheckoutRecord> checkoutRecords = new ArrayList<CheckoutRecord>();
 
 	public LibraryMember(String memberId, String firstName, String lastName, String phoneNumber, Address address) {
         super(firstName, lastName, phoneNumber, address);
@@ -14,6 +15,9 @@ public class LibraryMember extends Person implements Serializable {
     }
 	
 	public List<CheckoutRecord> getCheckoutRecords() {
+		if(checkoutRecords == null) {
+			checkoutRecords = new ArrayList<CheckoutRecord>();
+		}
 		return checkoutRecords;
 	}
 

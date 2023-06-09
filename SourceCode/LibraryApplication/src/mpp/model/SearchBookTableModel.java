@@ -1,13 +1,14 @@
 package mpp.model;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class BookTableModel extends AbstractTableModel {
+public class SearchBookTableModel extends AbstractTableModel {
     private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
-    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Borrower ID", "Checkout Date", "Due Date" };
+    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Availability","Borrower ID", "Checkout Date", "Due Date" };
 
-    public BookTableModel(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
+    public SearchBookTableModel(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
         this.bookCopies = bookCopies;
         this.checkoutRecords = checkoutRecords;
     }
@@ -40,18 +41,19 @@ public class BookTableModel extends AbstractTableModel {
             case 2:
                 return bookCopy.getBookCopyID();
             case 3:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" : checkoutRecord.getBorrowerId();
+                return bookCopy.isAvailable() ? "Available" : "Not Available";
             case 4:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getCheckoutDate();
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" : checkoutRecord.getBorrowerId();
             case 5:
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getCheckoutDate();
+            case 6:
                 return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getDueDate();
             default:
                 return null;
         }
     }
-    public void updateBooks(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
+    public void updateBooks(List<BookCopy> bookCopies) {
         this.bookCopies = bookCopies;
-        this.checkoutRecords = checkoutRecords;
         fireTableDataChanged();
     }
 }
