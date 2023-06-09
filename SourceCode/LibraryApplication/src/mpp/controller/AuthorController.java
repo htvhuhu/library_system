@@ -16,4 +16,8 @@ public class AuthorController {
 	public List<String> getAuthorNameList() {
 		return authorService.getAuthorNameList();
 	}
+	
+	public Author getAuthorByName(String fullName) {
+		return authorService.getAuthorByName(fullName);
+	}
 }
