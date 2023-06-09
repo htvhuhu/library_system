@@ -37,8 +37,19 @@ public class AddBookWindow {
 	private List<Author> selectedAuthors = new ArrayList<>();
 	private JTable tblBook = new JTable();
 	private DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
+	private AddBookCopyWindow addBookCopyWindow;
+	private CheckoutWindow checkoutWindow;
+	private SearchBookWindow searchBookWindow;
+	private PrintCheckoutRecordWindow printCheckoutRecordWindow;
+	
 
-	public AddBookWindow() {
+	public AddBookWindow(AddBookCopyWindow addBookCopyWindow, 
+			CheckoutWindow checkoutWindow, SearchBookWindow searchBookWindow,
+			PrintCheckoutRecordWindow printCheckoutRecordWindow) {
+		this.addBookCopyWindow = addBookCopyWindow;
+		this.checkoutWindow = checkoutWindow;
+		this.searchBookWindow = searchBookWindow;
+		this.printCheckoutRecordWindow = printCheckoutRecordWindow;
 		setupUI();
 	}
 
@@ -179,19 +190,7 @@ public class AddBookWindow {
         model.addColumn("Max Checkout");
         model.addColumn("Number of Copies");
         
-//        model.addRow(new Object[] {"ISBN", "Title", "Authors", "Max Checkout", "Number of Copies"});
-//
-//        // Add rows to the model
-//        Map<String, Book> books = bookController.getAllBooks();
-//        System.out.println("Get all books " + books.size());
-//        for (Entry<String, Book> entry: books.entrySet()) {
-//        	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
-//        	Book book = entry.getValue();
-//        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
-//            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), String.join(",", authorNames), book.getMaxCheckoutLength(), book.getCopies().size()});
-//        }
-        fillBookTableData(bookController.getAllBooks());
-//		
+        fillBookTableData(bookController.getAllBooks());	
 		
         // Create a scroll pane and add the table to it
         JScrollPane scrollPane = new JScrollPane(tblBook);
@@ -221,7 +220,10 @@ public class AddBookWindow {
 				//TODO: Validate
 				//Update book list
 		        fillBookTableData(bookController.getAllBooks());
-		        AddBookCopyWindow.fillBookTableData();
+		        addBookCopyWindow.fillBookTableData();
+		        searchBookWindow.loadTable(null);
+		        printCheckoutRecordWindow.loadTable(null);
+		        checkoutWindow.loadTable(null);
 			}
 		});
 	}
