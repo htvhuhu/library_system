@@ -30,12 +30,16 @@ import mpp.model.BookCopy;
 
 public class AddBookCopyWindow {
 	
-	private BookController bookController = new BookController();
+	private static BookController bookController = new BookController();
 	private AuthorController authorController = new AuthorController();
 	private JPanel mainPanel;
 	private List<Author> selectedAuthors = new ArrayList<>();
-	private JTable tblBook = new JTable();
-	private DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
+	private static JTable tblBook = new JTable();
+	private static DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
+	public static DefaultTableModel getModel() {
+		return model;
+	}
+
 	private JTable tbCopy = new JTable();
 	private DefaultTableModel copyModel = (DefaultTableModel) tbCopy.getModel(); 
 	private String selectedValue;
@@ -66,18 +70,9 @@ public class AddBookCopyWindow {
         //model.addColumn("Authors");
         model.addColumn("Max Checkout");
         model.addColumn("Number of Copies");
-        model.addRow(new Object[] {"ISBN", "Title", "Max Checkout", "Number of Copies"});
+        
+        fillBookTableData();
 
-        // Add rows to the model
-        Map<String, Book> books = bookController.getAllBooks();
-        System.out.println("Get all books " + books.size());
-        for (Entry<String, Book> entry: books.entrySet()) {
-        	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
-        	Book book = entry.getValue();
-        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
-            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), book.getMaxCheckoutLength(), book.getCopies().size()});
-        }
-		
 		JLabel lblBookList = new JLabel("Book List");
 		GridBagConstraints gbc_lblBookList = new GridBagConstraints();
 		gbc_lblBookList.insets = new Insets(0, 0, 5, 5);
@@ -123,7 +118,7 @@ public class AddBookCopyWindow {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				bookController.addCopy(selectedValue);
-				//copyModel.fireTableDataChanged();
+				copyModel.fireTableDataChanged();
 				fillCopyBookTable();
 			}
 		});
@@ -137,7 +132,7 @@ public class AddBookCopyWindow {
         // Add columns to the model
         copyModel.addColumn("Copy Number");
         copyModel.addColumn("Is Availabe");
-        copyModel.addRow(new Object[] {"Copy Number", "Available"});
+        //copyModel.addRow(new Object[] {"Copy Number", "Available"});
 	}
 	
 	private void fillCopyBookTable() {
@@ -158,13 +153,17 @@ public class AddBookCopyWindow {
 		}
 	}
 	
-	private void fillBookTableData(Map<String, Book> tableData) {
-		System.out.println("Get books recods :" + tableData.size());
-        DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
+	public static void fillBookTableData() {
         model.setRowCount(0);
-        for (Book book : tableData.values()) {
-            Object[] row = {book.getIsbn(), book.getTitle(), book.getCopies().size()};
-            model.addRow(row);
+		System.out.println("[fillBookTableData] Get books recods :");
+        Map<String, Book> books = bookController.getAllBooks();
+        System.out.println("Get all books " + books.size());
+        model.addRow(new Object[] {"ISBN", "Title", "Max Checkout", "Number of Copies"});
+        for (Entry<String, Book> entry: books.entrySet()) {
+        	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
+        	Book book = entry.getValue();
+        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
+            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), book.getMaxCheckoutLength(), book.getCopies().size()});
         }
     }
 	
