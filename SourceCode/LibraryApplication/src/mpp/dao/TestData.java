@@ -19,6 +19,10 @@ public class TestData {
 //		td.libraryMemberData();
 		td.createUserData();
 		td.createAuthorData();
+		List<Author> authors = AuthorDao.getInstance().getAllAuthors();
+		for (Author a: authors) {
+			System.out.println(a.getFirstName());
+		}
 	}
 	
 	private void createAuthorData() {
