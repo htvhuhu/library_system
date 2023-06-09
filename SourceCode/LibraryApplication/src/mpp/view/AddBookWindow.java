@@ -185,7 +185,8 @@ public class AddBookWindow {
         for (Entry<String, Book> entry: books.entrySet()) {
         	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
         	Book book = entry.getValue();
-            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), book.getAuthors(), book.getMaxCheckoutLength(), book.getCopies().size()});
+        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
+            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), String.join(",", authorNames), book.getMaxCheckoutLength(), book.getCopies().size()});
         }
 //		
 		
@@ -209,7 +210,7 @@ public class AddBookWindow {
 						selectedAuthors);
 				//TODO: Validate
 				//Update book list
-		        //fillBookTableData(bookController.getAllBooks());
+		        fillBookTableData(bookController.getAllBooks());
 		        
 			}
 		});
