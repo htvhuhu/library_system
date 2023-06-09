@@ -12,6 +12,7 @@ public class ServiceFactory {
 	static {
 		map.put(LoginService.class, new LoginService());
 		map.put(BookService.class, new BookService());
+		map.put(MemberService.class, new MemberService());
 	}
 	
 	public static Service getService(Class<? extends Service> serviceClass) {

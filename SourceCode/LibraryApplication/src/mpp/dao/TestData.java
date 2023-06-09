@@ -3,22 +3,31 @@ package mpp.dao;
 import mpp.model.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class TestData {
+
 	private LoginDao loginDao = (LoginDao)DataAccessFactory.getDataAccess(LoginDao.class);
+	private BookDao bookDao = (BookDao) DataAccessFactory.getDataAccess(BookDao.class);
+	private AuthorDao authorDao = (AuthorDao) DataAccessFactory.getDataAccess(AuthorDao.class);
 	
 	public static void main(String[] args) {
 		TestData td = new TestData();
-//		td.createBookData();
+		td.createBookData();
 //		td.libraryMemberData();
 		td.createUserData();
-		
-		
+		td.createAuthorData();
+	}
+	
+	private void createAuthorData() {
+		// TODO Auto-generated method stub
+		authorDao.saveAuthors(allAuthors);
 	}
 	///create books
 	public void createBookData() {
-		
+		bookDao.saveBooks(allBooks);
 	}
 	
 	public void createUserData() {
@@ -60,19 +69,19 @@ public class TestData {
 	@SuppressWarnings("serial")
 	public List<Author> allAuthors = new ArrayList<Author>() {
 		{
-			add(new Author("Joe", "Thomas", "641-445-2123", addresses.get(0), "", "A happy man is he."));
-			add(new Author("Sandra", "Thomas", "641-445-2123", addresses.get(0), "", "A happy wife is she."));
-			add(new Author("Nirmal", "Pugh", "641-919-3223", addresses.get(1), "", "Thinker of thoughts."));
-			add(new Author("Andrew", "Cleveland", "976-445-2232", addresses.get(2), "", "Author of childrens' books."));
-			add(new Author("Sarah", "Connor", "123-422-2663", addresses.get(3), "", "Known for her clever style."));
+			add(new Author("Joe", "Thomas", "641-445-2123", addresses.get(0), "", "A happy man is he.", UUID.randomUUID().toString()));
+			add(new Author("Sandra", "Thomas", "641-445-2123", addresses.get(0), "", "A happy wife is she.", UUID.randomUUID().toString()));
+			add(new Author("Nirmal", "Pugh", "641-919-3223", addresses.get(1), "", "Thinker of thoughts.", UUID.randomUUID().toString()));
+			add(new Author("Andrew", "Cleveland", "976-445-2232", addresses.get(2), "", "Author of childrens' books.", UUID.randomUUID().toString()));
+			add(new Author("Sarah", "Connor", "123-422-2663", addresses.get(3), "", "Known for her clever style.", UUID.randomUUID().toString()));
 		}
 	};
 	
 	@SuppressWarnings("serial")
 	List<Book> allBooks = new ArrayList<Book>() {
 		{
-//			add(new Book("23-11451", "The Big Fish", 21, Arrays.asList(allAuthors.get(0), allAuthors.get(1))));
-//			add(new Book("28-12331", "Antartica", 7, Arrays.asList(allAuthors.get(2))));
+			add(new Book("23-11451", "The Big Fish", Arrays.asList(allAuthors.get(0), allAuthors.get(1)), 21, new ArrayList<>()));
+			add(new Book("28-12331", "Antartica", Arrays.asList(allAuthors.get(2)), 7, new ArrayList<>()));
 //			add(new Book("99-22223", "Thinking Java", 21, Arrays.asList(allAuthors.get(3))));
 //			add(new Book("48-56882", "Jimmy's First Day of School", 7, Arrays.asList(allAuthors.get(4))));		
 		}

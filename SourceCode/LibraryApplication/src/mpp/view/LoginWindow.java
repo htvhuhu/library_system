@@ -1,16 +1,9 @@
 package mpp.view;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import mpp.controller.LoginController;
-import mpp.exception.LoginException;
-import mpp.model.Role;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -18,55 +11,36 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class LoginWindow extends JFrame implements ActionListener {
+public class LoginWindow {
 
-	private static final long serialVersionUID = -1468040792651195783L;
-	private JPanel contentPane;
+	private JPanel mainPanel;
 	private JTextField tfUserName;
 	private JPasswordField passwordField;
 	private JButton btnLogin;
-	private LoginController loginController = new LoginController();
+	private JLabel lblErrorMessage;
 	
+	private MainWindow mainWindow;
 	/*
 	 * Constructor
 	 */
-	public LoginWindow() {
+	public LoginWindow(MainWindow mainWindow) {
 		setupUI();
-		
-		btnLogin.addActionListener(e -> login(tfUserName.getText().trim(), passwordField.getPassword()));
+		this.mainWindow = mainWindow;
+		btnLogin.addActionListener(e -> mainWindow.login(tfUserName.getText().trim(), passwordField.getPassword()));
 	}
-	/**
-	 * Login function
-	 */
-	private void login(String userName, char[] password) {
-		if (userName.length() > 0 && password.length > 0) {
-			try {
-				Role role = loginController.login(userName, password);
-			} catch (LoginException e) {
-				JOptionPane.showMessageDialog(this, e.getMessage());
-			}
-		}
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	private void setupUI() {
-		setSize(400, 250);
-		setResizable(false);
-		setTitle("Library Management");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		mainPanel = new JPanel();
+		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		mainPanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel headerPanel = new JPanel();
-		contentPane.add(headerPanel, BorderLayout.NORTH);
+		mainPanel.add(headerPanel, BorderLayout.NORTH);
 		headerPanel.setLayout(new BorderLayout(0, 10));
 		
 		JLabel lblNewLabel = new JLabel("LOGIN");
@@ -78,7 +52,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 		headerPanel.add(separator);
 		
 		JPanel bodyPanel = new JPanel();
-		contentPane.add(bodyPanel, BorderLayout.CENTER);
+		mainPanel.add(bodyPanel, BorderLayout.CENTER);
 		bodyPanel.setLayout(null);
 		
 		JLabel lblUserName = new JLabel("User name");
@@ -99,18 +73,29 @@ public class LoginWindow extends JFrame implements ActionListener {
 		passwordField.setBounds(150, 54, 200, 19);
 		bodyPanel.add(passwordField);
 		
+		lblErrorMessage = new JLabel("");
+		lblErrorMessage.setForeground(new Color(255, 0, 0));
+		lblErrorMessage.setBounds(150, 93, 273, 19);
+		bodyPanel.add(lblErrorMessage);
+		
 		JPanel footerPanel = new JPanel();
-		contentPane.add(footerPanel, BorderLayout.SOUTH);
+		mainPanel.add(footerPanel, BorderLayout.SOUTH);
 		
 		btnLogin = new JButton("Login");
 		
 		footerPanel.add(btnLogin);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public JLabel getLblErrorMessage() {
+		return lblErrorMessage;
 	}
 
+
+	public JPanel getMainPanel() {
+		return mainPanel;
+	}
+
+	public MainWindow getMainWindow() {
+		return mainWindow;
+	}
 }

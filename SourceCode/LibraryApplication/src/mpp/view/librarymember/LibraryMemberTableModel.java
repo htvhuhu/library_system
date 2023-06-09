@@ -59,8 +59,7 @@ public class LibraryMemberTableModel extends AbstractTableModel {
 		case 3:
 			return member.getPhoneNumber();
 		case 4:
-			return member.getAddressString();
-		
+			return member.getAddress().toString();
 		}
 		
 		return null;
