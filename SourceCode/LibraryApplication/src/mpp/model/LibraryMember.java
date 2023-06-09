@@ -33,4 +33,10 @@ public class LibraryMember extends Person implements Serializable {
 		this.memberId = memberId;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return "ID: "+ this.getMemberId() +" - " + this.getFirstName() + " " + this.getLastName();
+	}
+	
 }

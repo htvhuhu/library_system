@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class SearchBookTableModel extends AbstractTableModel {
     private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
-    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Availability","Borrower ID", "Checkout Date", "Due Date", "Overdue" };
+    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Availability","Checkout Date", "Due Date", "Overdue" };
 
     public SearchBookTableModel(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
         this.bookCopies = bookCopies;
@@ -49,13 +49,11 @@ public class SearchBookTableModel extends AbstractTableModel {
                 return bookCopy.getBookCopyID();
             case 3:
                 return bookCopy.isAvailable() ? "Available" : "N/A";
-            case 4:
-                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" : checkoutRecord.getBorrowerId();
-            case 5:
+           case 4:
                 return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getCheckoutDate();
-            case 6:
+            case 5:
                 return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getDueDate();
-            case 7:
+            case 6:
                 return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ? "N/A" : isCopyOverdue(checkoutRecord) ? "Overdue" : "N/A";
                 
             default:

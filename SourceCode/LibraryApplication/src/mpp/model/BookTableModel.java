@@ -1,11 +1,15 @@
 package mpp.model;
 import javax.swing.table.AbstractTableModel;
+
+import mpp.service.MemberService;
+
 import java.util.List;
 
 public class BookTableModel extends AbstractTableModel {
     private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
-    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Borrower ID", "Checkout Date", "Due Date" };
+    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Borrower", "Checkout Date", "Due Date" };
+    private MemberService memberService = new MemberService();
 
     public BookTableModel(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
         this.bookCopies = bookCopies;
@@ -40,11 +44,11 @@ public class BookTableModel extends AbstractTableModel {
             case 2:
                 return bookCopy.getBookCopyID();
             case 3:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" : checkoutRecord.getBorrowerId();
+                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" : memberService.getMember(checkoutRecord.getBorrowerId()).toString();
             case 4:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getCheckoutDate();
+                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getCheckoutDate();
             case 5:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getDueDate();
+                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getDueDate();
             default:
                 return null;
         }
