@@ -41,7 +41,10 @@ public class BookService extends Service{
     
     public List<BookCopy> searchBookCopies(String isbn) {
     	try {
-    		 var bookCopies = books.stream()
+    		 var bookCopies = isbn.isBlank() ? 
+    				 books.stream()
+ 	                .flatMap(book -> book.getCopies().stream())
+    				 : 		books.stream()
     	                .filter(book -> book.getIsbn().equals(isbn))
     	                .flatMap(book -> book.getCopies().stream());
     	        if (bookCopies == null) {
@@ -57,9 +60,14 @@ public class BookService extends Service{
        
     }
     
-    public Book getBook(String isbn) {
+    public Book searchBook(String isbn) {
     	try {
-    		return books.stream()
+    		return isbn.isEmpty() ? 
+    				books.stream()
+                    .findFirst()
+                    .orElse(null)
+                    
+    				:books.stream()
                     .filter(book -> book.getIsbn().equals(isbn))
                     .findFirst()
                     .orElse(null);
@@ -71,7 +79,7 @@ public class BookService extends Service{
     }
     
     public void addCopyToBook(String isbn) {
-        Book book = getBook(isbn);
+        Book book = searchBook(isbn);
         if (book == null) {
             System.out.println("Book not found.");
             return;
@@ -95,7 +103,7 @@ public class BookService extends Service{
     
     public void deleteBook(String isbn)
 	{
-		var book = this.getBook(isbn);
+		var book = this.searchBook(isbn);
 		if (book != null)
 			books.remove(book);
 	}

@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -15,7 +16,9 @@ import javax.swing.JTextField;
 import mpp.controller.BookController;
 import mpp.controller.MemberController;
 import mpp.model.Book;
+import mpp.model.BookCopy;
 import mpp.model.BookTableModel;
+import mpp.model.LibraryMember;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -25,9 +28,17 @@ public class SearchBookWindow {
 	private JPanel mainPanel;
 	private JTextField txtSearchQuery;
 	BookController bookController = new BookController();
-	private List<Book> books;
+	private List<BookCopy> bookCopies;
+	JTable bookTable;
+	private List<LibraryMember> libraryMembers;
 	
 	public SearchBookWindow() {
+		bookCopies = bookController.searchBookCopies(null);
+		this.libraryMembers = bookController.getAllMembers();
+		bookTable = new JTable(new BookTableModel(this.bookCopies, this.libraryMembers));
+		BookTableModel model = (BookTableModel) bookTable.getModel();
+		model.updateBooks(this.bookCopies);
+		
 		setupUI();
 	}
 	
@@ -65,6 +76,18 @@ public class SearchBookWindow {
 		mainPanel.add(txtSearchQuery, gbc_txtSearchQuery);
 		txtSearchQuery.setColumns(10);
 		
+
+		//bookTable.setEnabled(false);  // makes the cells read-only
+
+		GridBagConstraints gbc_bookTable = new GridBagConstraints();
+		gbc_bookTable.gridwidth = GridBagConstraints.REMAINDER;
+		gbc_bookTable.fill = GridBagConstraints.BOTH;
+		gbc_bookTable.gridx = 0;
+		gbc_bookTable.gridy = 2;
+		gbc_bookTable.weightx = 1;
+		gbc_bookTable.weighty = 1;
+		mainPanel.add(new JScrollPane(bookTable), gbc_bookTable);
+
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,18 +97,23 @@ public class SearchBookWindow {
 				{
 	                JOptionPane.showMessageDialog(mainPanel,"No copy found!!!");
 				}
-				JTable bookTable = new JTable(new BookTableModel(bookCopyList));
-				bookTable.setEnabled(false);  // makes the cells read-only
-
-				GridBagConstraints gbc = new GridBagConstraints();
-				gbc.gridwidth = GridBagConstraints.REMAINDER;
-				gbc.fill = GridBagConstraints.BOTH;
-				gbc.weightx = 1;
-				gbc.weighty = 1;
-
-				mainPanel.add(new JScrollPane(bookTable), gbc);
+				
+				/*
+				var book = bookController.searchBook(txtSearchQuery.getText());
+				bookCopyList = new ArrayList<>();
+				bookCopyList.add(new BookCopy(1, false, book));
+				bookCopyList.add(new BookCopy(2, true, book));
+				bookCopyList.add(new BookCopy(3, false, book));
+				bookCopyList.add(new BookCopy(4, true, book));
+				*/
+				
+				BookTableModel model = (BookTableModel) bookTable.getModel();
+				model.updateBooks(bookCopyList);
+				
 			}
 		});
+		
+		
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.gridx = 2;
 		gbc_btnSearch.gridy = 1;
