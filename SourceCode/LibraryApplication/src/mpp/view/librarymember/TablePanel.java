@@ -32,8 +32,8 @@ public class TablePanel extends JPanel {
 		table = new JTable(tableModel);
 		popup = new JPopupMenu();
 		setLayout(new BorderLayout());
-		JMenuItem removeItem = new JMenuItem("Delete row");
-		JMenuItem updateItem = new JMenuItem("Update row");
+		JMenuItem removeItem = new JMenuItem("Delete Member");
+		JMenuItem updateItem = new JMenuItem("Update Member");
 		popup.add(removeItem);
 		popup.add(updateItem);
 		
