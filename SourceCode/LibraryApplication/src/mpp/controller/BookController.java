@@ -76,7 +76,6 @@ public class BookController {
              return;
          }
 
-    	 
          System.out.printf("\n%-50s %-20s %-20s %-50s %-20s %-20s%n", "Title", "ISBN", "BookCopyID", "Borrower", "Checkout Date", "Due Date");
          for (BookCopy bookCopy: bookCopies) {
              var book = bookCopy.getBook();
