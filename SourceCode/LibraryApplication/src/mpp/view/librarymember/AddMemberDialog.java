@@ -2,6 +2,8 @@ package mpp.view.librarymember;
 
 import java.awt.Frame;
 import javax.swing.JDialog;
+
+import mpp.constant.Message;
 import mpp.model.LibraryMember;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -64,7 +66,7 @@ public class AddMemberDialog extends JDialog {
 				|| state.isEmpty() || zipCode.isEmpty())
 		{
 			JOptionPane.showMessageDialog(null,
-				    "All fields are required.",
+					Message.MSG_CONFIRM_REQUIRED_FIELDS,
 				    "Warning",
 				    JOptionPane.WARNING_MESSAGE);
 			return;
