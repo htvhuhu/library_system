@@ -139,14 +139,15 @@ public class MainWindow extends JFrame {
         // Add Library Member Window
         LibraryMemberListWindow addLibraryMemberWindow = new LibraryMemberListWindow(this);
         JPanel addLibraryMemberPanel = addLibraryMemberWindow.getMainPanel();
-
-        // Add Book Window
-        AddBookWindow addBookWindow = new AddBookWindow();
-        JPanel addBookPanel = addBookWindow.getMainPanel();
         
         // Add Book Copy Window
         AddBookCopyWindow addBookCopyWindow = new AddBookCopyWindow();
         JPanel addBookCopyPanel = addBookCopyWindow.getMainPanel();
+        
+        // Add Book Window
+        AddBookWindow addBookWindow = new AddBookWindow(addBookCopyWindow, 
+        		checkoutWindow, searchBookWindow, printCheckoutRecordWindow);
+        JPanel addBookPanel = addBookWindow.getMainPanel();
         
         cards = new JPanel(new CardLayout());
 		// Librarian

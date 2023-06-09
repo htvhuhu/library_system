@@ -34,9 +34,9 @@ public class AddBookCopyWindow {
 	private AuthorController authorController = new AuthorController();
 	private JPanel mainPanel;
 	private List<Author> selectedAuthors = new ArrayList<>();
-	private static JTable tblBook = new JTable();
-	private static DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
-	public static DefaultTableModel getModel() {
+	private JTable tblBook = new JTable();
+	private DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
+	public DefaultTableModel getModel() {
 		return model;
 	}
 
@@ -153,7 +153,7 @@ public class AddBookCopyWindow {
 		}
 	}
 	
-	public static void fillBookTableData() {
+	public void fillBookTableData() {
         model.setRowCount(0);
 		System.out.println("[fillBookTableData] Get books recods :");
         Map<String, Book> books = bookController.getAllBooks();
