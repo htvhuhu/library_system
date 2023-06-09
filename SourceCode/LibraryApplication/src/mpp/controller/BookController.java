@@ -8,34 +8,38 @@ import mpp.model.BookCopy;
 import mpp.model.CheckoutRecord;
 import mpp.model.LibraryMember;
 import mpp.service.BookService;
+import mpp.service.MemberService;
 import mpp.service.ServiceFactory;
 
 public class BookController {
 	private BookService bookService = (BookService) ServiceFactory.getService(BookService.class);
+	private MemberService memberService = new MemberService();
 	
-	public void checkoutBook(String memberId, String isbn) {
-        LibraryMember member = bookService.getMember(memberId);
+	
+	public String  checkoutBook(String memberId, String isbn, String borrowerId) {
+        LibraryMember member = memberService.getMember(memberId);
         if (member == null) {
-            System.out.println("Member not found.");
-            return;
+            return "Member not found.";
         }
 
         var copy = bookService.getAvailableCopy(isbn);
         if (copy == null) {
-            System.out.println("Book not found or no available copies.");
-            return;
+            return "Book not found or no available copies.";
         }
 
-        CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(14));
+        CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(14), borrowerId);
         member.getCheckoutRecords().add(record);
-        copy.setAvailable(false);
+        memberService.updateMember(member);
+        
+        copy.updateAvailable(false);
+        bookService.updateBook(copy.getBook());
 
-        System.out.println("Checkout successful! Due date: " + record.getDueDate());
+        return "Checkout successful! Due date: " + record.getDueDate();
     }
 	
 
     public void printCheckoutRecord(String memberId) {
-        LibraryMember member = bookService.getMember(memberId);
+        LibraryMember member = memberService.getMember(memberId);
         if (member == null) {
             System.out.println("Member not found.");
             return;
@@ -62,7 +66,7 @@ public class BookController {
 
     public boolean isCopyOverdue(BookCopy copy) {
         LocalDate today = LocalDate.now();
-        return today.isAfter(copy.getDueDate()) && copy.getBorrowerId() != null;
+        return true;//today.isAfter(copy.getDueDate()) && copy.getBorrowerId() != null;
     }
     
 	public void addBook(String isbn, String title, List<Author> authors, int maxCheckoutLength, int numberOfCopies) {
