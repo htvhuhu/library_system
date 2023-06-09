@@ -2,6 +2,7 @@ package mpp.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import mpp.model.Author;
 import mpp.model.Book;
@@ -80,13 +81,17 @@ public class BookController {
         return true;//today.isAfter(copy.getDueDate()) && copy.getBorrowerId() != null;
     }
     
-	public void addBook(String isbn, String title, List<Author> authors, int maxCheckoutLength, int numberOfCopies) {
-        bookService.addBook(isbn, title, authors, maxCheckoutLength, numberOfCopies);
+	public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
+        bookService.addBook(isbn, title, maxCheckoutLength, authors);
         System.out.println("Book added successfully!");
     }
 	
 	public void addCopy(String isbn) {
 		bookService.addCopyToBook(isbn);
         System.out.println("Copy added successfully!");
+    }
+	
+	public Map<String, Book> getAllBooks() {
+        return bookService.getAllBooks();
     }
 }

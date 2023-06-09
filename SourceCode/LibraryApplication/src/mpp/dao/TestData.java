@@ -19,6 +19,7 @@ public class TestData {
 //		td.libraryMemberData();
 		td.createUserData();
 		td.createAuthorData();
+		
 		List<Author> authors = AuthorDao.getInstance().getAllAuthors();
 		for (Author a: authors) {
 			System.out.println(a.getFirstName());
@@ -51,7 +52,6 @@ public class TestData {
 		libraryMember = new LibraryMember("1004", "Ricardo", "Montalbahn", "641-472-2871", addresses.get(7));
 		members.add(libraryMember);
 		
-		//DataAccessFacade.loadMemberMap(members);	
 	}
 	
 	///////////// DATA //////////////
@@ -84,10 +84,10 @@ public class TestData {
 	@SuppressWarnings("serial")
 	List<Book> allBooks = new ArrayList<Book>() {
 		{
-			add(new Book("23-11451", "The Big Fish", Arrays.asList(allAuthors.get(0), allAuthors.get(1)), 21, new ArrayList<>()));
-			add(new Book("28-12331", "Antartica", Arrays.asList(allAuthors.get(2)), 7, new ArrayList<>()));
-//			add(new Book("99-22223", "Thinking Java", 21, Arrays.asList(allAuthors.get(3))));
-//			add(new Book("48-56882", "Jimmy's First Day of School", 7, Arrays.asList(allAuthors.get(4))));		
+			add(new Book("23-11451", "The Big Fish", 21, Arrays.asList(allAuthors.get(0))));
+			add(new Book("28-12331", "Antartica", 7, Arrays.asList(allAuthors.get(2))));
+			add(new Book("99-22223", "Thinking Java", 21, Arrays.asList(allAuthors.get(3))));
+			add(new Book("48-56882", "Jimmy's First Day of School", 7, Arrays.asList(allAuthors.get(4))));		
 		}
 	};
 	

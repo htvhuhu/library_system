@@ -30,4 +30,10 @@ public class AuthorService extends Service {
 		}
 		return authors;
 	}
+
+	//TODO: Temp JList cannot hold Object, only hold String
+	public Author getAuthorByName(String fullName) {
+		return getAuthors().stream().filter( 
+				author -> fullName.equals(author.getFirstName() + " " + author.getLastName())).findFirst().get();
+	}
 }

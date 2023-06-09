@@ -1,22 +1,18 @@
 package mpp.service;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Map;
 
 import mpp.dao.BookDao;
-import mpp.dao.MemberDao;
+import mpp.dao.DataAccessFactory;
+import mpp.dao.LoginDao;
 import mpp.model.Author;
 import mpp.model.Book;
 import mpp.model.BookCopy;
-import mpp.model.LibraryMember;
 
 public class BookService extends Service{
+	private BookDao bookDao = (BookDao)DataAccessFactory.getDataAccess(BookDao.class);
 	
     private List<Book> books;
-    private BookDao bookDao = BookDao.getInstance();
-    //private BookDao bookDao = BookDao.getInstance();
-
     
     public BookService() {
     	this.books = this.bookDao.getAllBooks();
@@ -51,8 +47,6 @@ public class BookService extends Service{
     	            return null;
     	        }
     	        return bookCopies.toList();
-    	        
-    	        
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
@@ -88,12 +82,8 @@ public class BookService extends Service{
         book.getCopies().add(new BookCopy(newCopyNumber, true,book));
     }
     
-    public void addBook(String isbn, String title, List<Author> authors, int maxCheckoutLength, int numberOfCopies) {
-        var book = new Book(isbn, title, authors, maxCheckoutLength,null);
-    	List<BookCopy> copies = IntStream.rangeClosed(1, numberOfCopies)
-            .mapToObj(i -> new BookCopy(i, true, book))
-            .collect(Collectors.toList());
-    	book.setCopies(copies);
+    public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
+        var book = new Book(isbn, title, maxCheckoutLength, authors);
         books.add(book);
     }
     
@@ -114,5 +104,8 @@ public class BookService extends Service{
 		addBook(book);
 	}
 	
+    public Map<String, Book> getAllBooks() {
+        return bookDao.getAllBook();
+    }
 }
 
