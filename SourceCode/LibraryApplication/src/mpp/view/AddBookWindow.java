@@ -24,6 +24,8 @@ import mpp.controller.AuthorController;
 import mpp.controller.BookController;
 import mpp.model.Author;
 import mpp.model.Book;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class AddBookWindow {
 	
@@ -33,7 +35,6 @@ public class AddBookWindow {
 	private JTextField txtTitle;
 	private JTextField txtISBN;
 	private List<Author> selectedAuthors = new ArrayList<>();
-	private JTextField txtMaxCheckout;
 	private JTable tblBook = new JTable();
 	private DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
 
@@ -52,6 +53,7 @@ public class AddBookWindow {
 		
 		JLabel lblBookTitle = new JLabel("Title:");
 		GridBagConstraints gbc_lblBookTitle = new GridBagConstraints();
+		gbc_lblBookTitle.anchor = GridBagConstraints.WEST;
 		gbc_lblBookTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBookTitle.gridx = 0;
 		gbc_lblBookTitle.gridy = 1;
@@ -61,11 +63,7 @@ public class AddBookWindow {
 	
 		List<String> authors = authorController.getAuthorNameList();
 		String[] authorArr = authors.toArray(new String[authors.size()]);
-//		allAuthors.stream().forEach(author -> {
-//			String name = author.getFirstName() + " " + author.getLastName();
-//			authors.add(name);
-//		});
-//		
+	
 		txtTitle = new JTextField();
 		GridBagConstraints gbc_txtTitle = new GridBagConstraints();
 		gbc_txtTitle.fill = GridBagConstraints.HORIZONTAL;
@@ -75,8 +73,9 @@ public class AddBookWindow {
 		mainPanel.add(txtTitle, gbc_txtTitle);
 		txtTitle.setColumns(10);
 		
-		JLabel lblISBN = new JLabel("ISBN Number:");
+		JLabel lblISBN = new JLabel("ISBN:");
 		GridBagConstraints gbc_lblISBN = new GridBagConstraints();
+		gbc_lblISBN.anchor = GridBagConstraints.WEST;
 		gbc_lblISBN.insets = new Insets(0, 0, 5, 5);
 		gbc_lblISBN.gridx = 0;
 		gbc_lblISBN.gridy = 2;
@@ -93,23 +92,24 @@ public class AddBookWindow {
 		
 		JLabel lblMaxCheckout = new JLabel("Max Checkout Length");
 		GridBagConstraints gbc_lblMaxCheckout = new GridBagConstraints();
+		gbc_lblMaxCheckout.anchor = GridBagConstraints.WEST;
 		gbc_lblMaxCheckout.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMaxCheckout.gridx = 0;
 		gbc_lblMaxCheckout.gridy = 3;
 		mainPanel.add(lblMaxCheckout, gbc_lblMaxCheckout);
 		
-		txtMaxCheckout = new JTextField();
-		GridBagConstraints gbc_txtMaxCheckout = new GridBagConstraints();
-		gbc_txtMaxCheckout.insets = new Insets(0, 0, 5, 5);
-		gbc_txtMaxCheckout.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtMaxCheckout.gridx = 2;
-		gbc_txtMaxCheckout.gridy = 3;
-		mainPanel.add(txtMaxCheckout, gbc_txtMaxCheckout);
-		txtMaxCheckout.setColumns(10);
+		JComboBox comboBoxMax = new JComboBox();
+		comboBoxMax.setModel(new DefaultComboBoxModel(new String[] {"7", "21"}));
+		GridBagConstraints gbc_comboBoxMax = new GridBagConstraints();
+		gbc_comboBoxMax.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxMax.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxMax.gridx = 2;
+		gbc_comboBoxMax.gridy = 3;
+		mainPanel.add(comboBoxMax, gbc_comboBoxMax);
 		
-		JLabel lblAuthor = new JLabel("Author Information:");
+		JLabel lblAuthor = new JLabel("Author:");
 		GridBagConstraints gbc_lblAuthor = new GridBagConstraints();
-		gbc_lblAuthor.anchor = GridBagConstraints.NORTH;
+		gbc_lblAuthor.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblAuthor.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAuthor.gridx = 0;
 		gbc_lblAuthor.gridy = 4;
@@ -149,6 +149,7 @@ public class AddBookWindow {
             	listSelectedAuthor.setListData(listAuthor.getSelectedValues());
             	for (Object o: listAuthor.getSelectedValues()) {
             		String s = o.toString();
+            		System.out.println("Selected author name:" + s);
             		selectedAuthors.add(authorController.getAuthorByName(s));
             	}
 			}
@@ -165,12 +166,11 @@ public class AddBookWindow {
 		
 		JLabel lblBookList = new JLabel("Book List");
 		GridBagConstraints gbc_lblBookList = new GridBagConstraints();
+		gbc_lblBookList.anchor = GridBagConstraints.WEST;
 		gbc_lblBookList.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBookList.gridx = 0;
 		gbc_lblBookList.gridy = 6;
 		mainPanel.add(lblBookList, gbc_lblBookList);
-		
-		
 
         // Add columns to the model
         model.addColumn("ISBN");
@@ -178,28 +178,30 @@ public class AddBookWindow {
         model.addColumn("Authors");
         model.addColumn("Max Checkout");
         model.addColumn("Number of Copies");
-
-        // Add rows to the model
-        Map<String, Book> books = bookController.getAllBooks();
-        System.out.println("Get all books " + books.size());
-        model.addRow(new Object[]{"Isbn", "Title", "Authors", "Max Checkout", "Number of Copies"});
-        for (Entry<String, Book> entry: books.entrySet()) {
-        	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
-        	Book book = entry.getValue();
-        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
-            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), String.join(",", authorNames), book.getMaxCheckoutLength(), book.getCopies().size()});
-        }
+        
+//        model.addRow(new Object[] {"ISBN", "Title", "Authors", "Max Checkout", "Number of Copies"});
+//
+//        // Add rows to the model
+//        Map<String, Book> books = bookController.getAllBooks();
+//        System.out.println("Get all books " + books.size());
+//        for (Entry<String, Book> entry: books.entrySet()) {
+//        	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
+//        	Book book = entry.getValue();
+//        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
+//            model.addRow(new Object[]{book.getIsbn(), book.getTitle(), String.join(",", authorNames), book.getMaxCheckoutLength(), book.getCopies().size()});
+//        }
+        fillBookTableData(bookController.getAllBooks());
 //		
 		
         // Create a scroll pane and add the table to it
         JScrollPane scrollPane = new JScrollPane(tblBook);
 		GridBagConstraints gbc_tblBook = new GridBagConstraints();
 		gbc_tblBook.gridwidth = 6;
-		gbc_tblBook.insets = new Insets(0, 0, 5, 5);
+		gbc_tblBook.insets = new Insets(0, 0, 5, 0);
 		gbc_tblBook.fill = GridBagConstraints.BOTH;
 		gbc_tblBook.gridx = 0;
 		gbc_tblBook.gridy = 7;
-		mainPanel.add(tblBook, gbc_tblBook);
+		mainPanel.add(scrollPane, gbc_tblBook);
 		btnAddBook.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -207,7 +209,14 @@ public class AddBookWindow {
 
 //				Book book = new Book(txtISBN.getText() , txtTitle.getText(),
 //						selectedAuthors, 100, new ArrayList<>());
-				bookController.addBook(txtISBN.getText() , txtTitle.getText(), Integer.valueOf(txtMaxCheckout.getText()),
+				System.out.println("Check selectedAuthors");
+				if (!selectedAuthors.isEmpty()) {
+					for (Author author: selectedAuthors) {
+						System.out.println("Author name: " + author.getFirstName() + " " + author.getLastName());
+					}
+				}
+				
+				bookController.addBook(txtISBN.getText() , txtTitle.getText(), Integer.valueOf(comboBoxMax.getSelectedItem().toString()),
 						selectedAuthors);
 				//TODO: Validate
 				//Update book list
@@ -215,10 +224,10 @@ public class AddBookWindow {
 		        
 			}
 		});
-		//fillBookTableData(bookController.getAllBooks());
 	}
 	
 	private void fillBookTableData(Map<String, Book> tableData) {
+		model.addRow(new Object[] {"ISBN", "Title", "Authors", "Max Checkout", "Number of Copies"});
 		System.out.println("Get books recods :" + tableData.size());
         DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
         model.setRowCount(0);
