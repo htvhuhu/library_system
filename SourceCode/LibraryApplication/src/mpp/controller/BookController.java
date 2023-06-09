@@ -45,7 +45,7 @@ public class BookController {
             return "Book not found or no available copies.";
         }
 
-        CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(14), memberId);
+        CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(copy.getBook().getMaxCheckoutLength()), memberId);
         member.getCheckoutRecords().add(record);
         memberService.updateMember(member);
         
