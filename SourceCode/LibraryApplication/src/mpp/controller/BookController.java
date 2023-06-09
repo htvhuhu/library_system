@@ -25,10 +25,16 @@ public class BookController {
 	}
 	
 	public List<LibraryMember> getMember(String memberId) {
-		 return new ArrayList<>(Arrays.asList(memberService.getMember(memberId)));
+		 var result = memberService.getMember(memberId) == null ? new ArrayList<LibraryMember>() : new ArrayList<>(Arrays.asList(memberService.getMember(memberId)));
+		 return result;
 	}
 	
 	public String  checkoutBook(String memberId, String isbn) {
+		var members = this.getMember(memberId);
+		if(members == null || members.size() == 0)
+		{
+			return "Member not found.";
+		}
         LibraryMember member = this.getMember(memberId).stream().findFirst().orElse(null);
         if (member == null) {
             return "Member not found.";
@@ -86,10 +92,6 @@ public class BookController {
         return bookService.searchBook(isbn);
     }
 
-    public boolean isCopyOverdue(BookCopy copy) {
-        LocalDate today = LocalDate.now();
-        return true;//today.isAfter(copy.getDueDate()) && copy.getBorrowerId() != null;
-    }
     
 	public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
         bookService.addBook(isbn, title, maxCheckoutLength, authors);

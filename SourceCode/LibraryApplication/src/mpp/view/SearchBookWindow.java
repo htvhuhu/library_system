@@ -94,7 +94,12 @@ public class SearchBookWindow {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				var bookCopyList = bookController.searchBookCopies(txtSearchQuery.getText());
+				var query = txtSearchQuery.getText();
+				if (query.isBlank()) {
+					JOptionPane.showMessageDialog(mainPanel,"Please input ISBN!!!");
+					return;
+				}
+				var bookCopyList = bookController.searchBookCopies(query);
 				
 				if(bookCopyList == null || bookCopyList.size() == 0)
 				{
