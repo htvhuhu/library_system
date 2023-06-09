@@ -2,15 +2,15 @@ package mpp.view.librarymember;
 import java.util.EventObject;
 
 public class FormEvent extends EventObject {
-
-	private String number;
+	private static final long serialVersionUID = 7508376620225487762L;
+	private String memberId;
 	private String firstName;
 	private String lastName;
-	private String phone;
+	private String phoneNumber;
 	private String street;
 	private String city;
 	private String state;
-	private String zip;
+	private String zipCode;
 
 	public FormEvent(Object source) {
 		super(source);
@@ -20,29 +20,27 @@ public class FormEvent extends EventObject {
 			String state, String zip, Object source) {
 		super(source);
 
-		this.number = number;
+		this.memberId = number;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.phone = phone;
+		this.phoneNumber = phone;
 		this.street = street;
 		this.city = city;
 		this.state = state;
-		this.zip = zip;
+		this.zipCode = zip;
 	}
 	
-	public FormEvent(String number, Object source) {
+	public FormEvent(String memberId, Object source) {
 		super(source);
-
-		this.number = number;
-		
+		this.memberId = memberId;
 	}
 
-	public String getNumber() {
-		return number;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getFirstName() {
@@ -61,12 +59,12 @@ public class FormEvent extends EventObject {
 		this.lastName = lastName;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getStreet() {
@@ -93,12 +91,12 @@ public class FormEvent extends EventObject {
 		this.state = state;
 	}
 
-	public String getZip() {
-		return zip;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setZip(String zip) {
-		this.zip = zip;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 	
 	
