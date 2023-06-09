@@ -144,8 +144,8 @@ public class AddBookWindow {
 
 //				Book book = new Book(txtISBN.getText() , txtTitle.getText(),
 //						selectedAuthors, 100, new ArrayList<>());
-				bookController.addBook(txtISBN.getText() , txtTitle.getText(),
-						selectedAuthors, 100, 100);
+				bookController.addBook(txtISBN.getText() , txtTitle.getText(), 100,
+						selectedAuthors);
 			}
 		});
 		GridBagConstraints gbc_btnAddBook = new GridBagConstraints();
