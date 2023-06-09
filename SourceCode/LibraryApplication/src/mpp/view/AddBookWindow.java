@@ -182,6 +182,7 @@ public class AddBookWindow {
         // Add rows to the model
         Map<String, Book> books = bookController.getAllBooks();
         System.out.println("Get all books " + books.size());
+        model.addRow(new Object[]{"Isbn", "Title", "Authors", "Max Checkout", "Number of Copies"});
         for (Entry<String, Book> entry: books.entrySet()) {
         	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
         	Book book = entry.getValue();
