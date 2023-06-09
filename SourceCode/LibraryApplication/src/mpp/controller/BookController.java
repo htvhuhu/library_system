@@ -16,7 +16,7 @@ public class BookController {
 	private MemberService memberService = new MemberService();
 	
 	
-	public String  checkoutBook(String memberId, String isbn, String borrowerId) {
+	public String  checkoutBook(String memberId, String isbn) {
         LibraryMember member = memberService.getMember(memberId);
         if (member == null) {
             return "Member not found.";
@@ -27,7 +27,7 @@ public class BookController {
             return "Book not found or no available copies.";
         }
 
-        CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(14), borrowerId);
+        CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(14), memberId);
         member.getCheckoutRecords().add(record);
         memberService.updateMember(member);
         
