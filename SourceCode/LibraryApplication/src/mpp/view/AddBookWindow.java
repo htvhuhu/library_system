@@ -148,7 +148,7 @@ public class AddBookWindow {
 		gbc_listSelectedAuthor.gridy = 4;
 		mainPanel.add(listSelectedAuthor, gbc_listSelectedAuthor);
 		
-		JButton btnAddAuthor = new JButton("Add");
+		JButton btnAddAuthor = new JButton("Add>>");
 		GridBagConstraints gbc_btnAddAuthor = new GridBagConstraints();
 		gbc_btnAddAuthor.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAddAuthor.gridx = 3;
@@ -232,7 +232,7 @@ public class AddBookWindow {
 		tblBook.setDefaultEditor(Object.class, null);
         // Show border
 		tblBook.setShowGrid(true);
-		tblBook.setGridColor(Color.GRAY);
+		//tblBook.setGridColor(Color.GRAY);
 	}
 	
 	private void fillBookTableData(Map<String, Book> tableData) {

@@ -46,9 +46,9 @@ public class AddBookCopyWindow {
 		mainPanel = new JPanel();
 		GridBagLayout gbl_mainPanel = new GridBagLayout();
 		gbl_mainPanel.columnWidths = new int[]{121, 40, 125, 42, 58, 150, 0};
-		gbl_mainPanel.rowHeights = new int[]{26, 26, 26, 26, 29, 29, 0};
+		gbl_mainPanel.rowHeights = new int[]{26, 26, 0, 26, 26, 29, 29, 0};
 		gbl_mainPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_mainPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_mainPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		mainPanel.setLayout(gbl_mainPanel);
 
         // Add columns to the model
@@ -96,7 +96,7 @@ public class AddBookCopyWindow {
 		gbc_tbCopy.insets = new Insets(0, 0, 5, 5);
 		gbc_tbCopy.fill = GridBagConstraints.BOTH;
 		gbc_tbCopy.gridx = 0;
-		gbc_tbCopy.gridy = 3;
+		gbc_tbCopy.gridy = 4;
 		mainPanel.add(tbCopy, gbc_tbCopy);
 		
 		JButton btnCopy = new JButton("Add copy");
@@ -105,13 +105,14 @@ public class AddBookCopyWindow {
 			public void mouseClicked(MouseEvent e) {
 				bookController.addCopy(selectedValue);
 				copyModel.fireTableDataChanged();
+				
 				fillCopyBookTable();
 			}
 		});
 		GridBagConstraints gbc_btnCopy = new GridBagConstraints();
 		gbc_btnCopy.insets = new Insets(0, 0, 5, 0);
 		gbc_btnCopy.gridx = 5;
-		gbc_btnCopy.gridy = 3;
+		gbc_btnCopy.gridy = 4;
 		mainPanel.add(btnCopy, gbc_btnCopy);
 		
         // Add columns to the model
@@ -132,17 +133,17 @@ public class AddBookCopyWindow {
 	}
 	
 	private void fillCopyBookTable() {
+		copyModel.setRowCount(0);
 		Map<String, Book> books = bookController.getAllBooks();
 		Book book = books.get(selectedValue);
+		
 		if (book != null) {
 			List<BookCopy> copyList = book.getCopies();
-			copyModel.addRow(new Object[] {"Copy Number", "Available"});
-			if (!copyList.isEmpty()) {
-		        DefaultTableModel model = (DefaultTableModel) tbCopy.getModel();
-		        model.setRowCount(0);
+			if (!copyList.isEmpty()) {				
+				copyModel.addRow(new Object[] {"Copy Number", "Available"});
 		        for (BookCopy copy : copyList) {
 		            Object[] row = {copy.getBookCopyID(), copy.isAvailable()};
-		            model.addRow(row);
+		            copyModel.addRow(row);
 		        }
 			}
 		}

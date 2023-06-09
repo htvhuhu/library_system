@@ -8,7 +8,7 @@ import java.util.List;
 public class BookTableModel extends AbstractTableModel {
     private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
-    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Borrower", "Checkout Date", "Due Date" };
+    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Member Name", "Checkout Date", "Due Date" };
     private MemberService memberService = new MemberService();
 
     public BookTableModel(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
