@@ -120,7 +120,7 @@ public class MainWindow extends JFrame {
 
         // Administrator
         // Add Library Member Window
-        LibraryMemberList addLibraryMemberWindow = new LibraryMemberList(this);
+        LibraryMemberListWindow addLibraryMemberWindow = new LibraryMemberListWindow(this);
         JPanel addLibraryMemberPanel = addLibraryMemberWindow.getMainPanel();
 
         // Add Book Window

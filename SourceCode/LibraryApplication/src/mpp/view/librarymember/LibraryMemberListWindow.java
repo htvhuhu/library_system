@@ -2,27 +2,24 @@ package mpp.view.librarymember;
 
 import java.awt.BorderLayout;
 import java.awt.Frame;
-import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import mpp.controller.MemberController;
-import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
 
-public class LibraryMemberList {
+public class LibraryMemberListWindow {
 	private JPanel mainPanel;
 	private TablePanel tablePanel;
-	private JButton okBtn;
 	private MemberController controller;
-	private Toolbar toolbar;
-	private AddMember addMember;
-	private JButton btnNewButton;
+	private AddMemberDialog addMember;
+	private JButton btnAddMember;
+	private JPanel headerPanel;
 
-	public LibraryMemberList(Frame parent) {
+	public LibraryMemberListWindow(Frame parent) {
 		controller = new MemberController();
-		toolbar = new Toolbar();
-		addMember = new AddMember(this, parent);
+		addMember = new AddMemberDialog(this, parent);
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
@@ -30,33 +27,27 @@ public class LibraryMemberList {
 		tablePanel.setData(controller.getMembers());
 		mainPanel.add(tablePanel, BorderLayout.CENTER);
 
-		okBtn = new JButton("+ Add Member");
-		okBtn.setHorizontalAlignment(SwingConstants.LEFT);
-
-		// Set up mnemomics
-		okBtn.setMnemonic(KeyEvent.VK_O);
-
-		// add(okBtn, BorderLayout.NORTH);
-		mainPanel.add(toolbar, BorderLayout.NORTH);
-
-		btnNewButton = new JButton("Add new member");
-		btnNewButton.addActionListener(new ActionListener() {
+		headerPanel = new JPanel();
+		mainPanel.add(headerPanel, BorderLayout.NORTH);
+		
+		btnAddMember = new JButton("Add new member");
+		btnAddMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addMember.setSize(600, 500);
 				addMember.clearFields();
 				addMember.setVisible(true);
 
 			}
 		});
-		toolbar.add(btnNewButton);
+		headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		headerPanel.add(btnAddMember);
 
 		tablePanel.setFormListener(new FormListener() {
 			public void formEventOccurred(FormEvent e, int type) {
-				if (type == 1) {
+				if (type == 1) { // add new
 					saveMember(e, type);
-					refestList();
-				} else if (type == 2) {
-					var selectedItem = controller.getMember(e.getNumber());
+					refreshList();
+				} else if (type == 2) { // update
+					var selectedItem = controller.getMember(e.getMemberId());
 					addMember.populateData(selectedItem);
 					addMember.setVisible(true);
 				}
@@ -69,7 +60,7 @@ public class LibraryMemberList {
 		controller.saveMember(e, type);
 	}
 
-	public void refestList() {
+	public void refreshList() {
 		tablePanel.refresh();
 	}
 
