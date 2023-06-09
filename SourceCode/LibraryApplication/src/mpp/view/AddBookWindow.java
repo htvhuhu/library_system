@@ -1,5 +1,6 @@
 package mpp.view;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -226,6 +227,12 @@ public class AddBookWindow {
 		        checkoutWindow.loadTable(null);
 			}
 		});
+		
+		// Disable edit on tables
+		tblBook.setDefaultEditor(Object.class, null);
+        // Show border
+		tblBook.setShowGrid(true);
+		tblBook.setGridColor(Color.GRAY);
 	}
 	
 	private void fillBookTableData(Map<String, Book> tableData) {

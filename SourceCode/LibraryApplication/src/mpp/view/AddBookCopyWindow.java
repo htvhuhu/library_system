@@ -1,39 +1,33 @@
 package mpp.view;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import mpp.controller.AuthorController;
 import mpp.controller.BookController;
-import mpp.model.Author;
 import mpp.model.Book;
 import mpp.model.BookCopy;
 
 public class AddBookCopyWindow {
 	
 	private static BookController bookController = new BookController();
-	private AuthorController authorController = new AuthorController();
+	//private AuthorController authorController = new AuthorController();
 	private JPanel mainPanel;
-	private List<Author> selectedAuthors = new ArrayList<>();
+	//private List<Author> selectedAuthors = new ArrayList<>();
 	private JTable tblBook = new JTable();
 	private DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
 	public DefaultTableModel getModel() {
@@ -56,13 +50,6 @@ public class AddBookCopyWindow {
 		gbl_mainPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_mainPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		mainPanel.setLayout(gbl_mainPanel);
-		
-
-	
-		List<String> authors = authorController.getAuthorNameList();
-		String[] authorArr = authors.toArray(new String[authors.size()]);
-		
-		
 
         // Add columns to the model
         model.addColumn("ISBN");
@@ -95,11 +82,10 @@ public class AddBookCopyWindow {
 		            public void valueChanged(ListSelectionEvent e) {
 		                if (!e.getValueIsAdjusting()) {  // Ensure the event is not still in the process of adjusting
 		                    int selectedRow = tblBook.getSelectedRow();
-		                    int selectedColumn = tblBook.getSelectedColumn();
 		
 		                    // Do something with the selected data
 		                    selectedValue = tblBook.getValueAt(selectedRow, 0).toString();
-		                    System.out.println("Selected value: " + selectedValue);
+		                    //System.out.println("Selected value: " + selectedValue);
 		                    fillCopyBookTable();
 		                }
 		            }
@@ -127,12 +113,22 @@ public class AddBookCopyWindow {
 		gbc_btnCopy.gridx = 5;
 		gbc_btnCopy.gridy = 3;
 		mainPanel.add(btnCopy, gbc_btnCopy);
-		//fillBookTableData(bookController.getAllBooks());
 		
         // Add columns to the model
         copyModel.addColumn("Copy Number");
         copyModel.addColumn("Is Availabe");
-        //copyModel.addRow(new Object[] {"Copy Number", "Available"});
+        
+		// Disable edit on tables
+		tblBook.setDefaultEditor(Object.class, null);
+        // Show border
+		tblBook.setShowGrid(true);
+		tblBook.setGridColor(Color.GRAY);
+		
+		// Disable edit on tables
+		tbCopy.setDefaultEditor(Object.class, null);
+        // Show border
+		tbCopy.setShowGrid(true);
+		tbCopy.setGridColor(Color.GRAY);
 	}
 	
 	private void fillCopyBookTable() {
@@ -142,7 +138,6 @@ public class AddBookCopyWindow {
 			List<BookCopy> copyList = book.getCopies();
 			copyModel.addRow(new Object[] {"Copy Number", "Available"});
 			if (!copyList.isEmpty()) {
-				System.out.println("copy list :" + copyList.size());
 		        DefaultTableModel model = (DefaultTableModel) tbCopy.getModel();
 		        model.setRowCount(0);
 		        for (BookCopy copy : copyList) {
@@ -155,14 +150,14 @@ public class AddBookCopyWindow {
 	
 	public void fillBookTableData() {
         model.setRowCount(0);
-		System.out.println("[fillBookTableData] Get books recods :");
+		//System.out.println("[fillBookTableData] Get books recods :");
         Map<String, Book> books = bookController.getAllBooks();
-        System.out.println("Get all books " + books.size());
+        //System.out.println("Get all books " + books.size());
         model.addRow(new Object[] {"ISBN", "Title", "Max Checkout", "Number of Copies"});
         for (Entry<String, Book> entry: books.entrySet()) {
         	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
         	Book book = entry.getValue();
-        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
+       
             model.addRow(new Object[]{book.getIsbn(), book.getTitle(), book.getMaxCheckoutLength(), book.getCopies().size()});
         }
     }
