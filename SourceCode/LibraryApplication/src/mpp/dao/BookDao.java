@@ -50,7 +50,7 @@ public class BookDao extends DataAccess {
 		return books;
 	}
 
-	public static BookDao getInstance() {
+	static BookDao getInstance() {
 		if(instance == null) {
 			return new BookDao();
 		}

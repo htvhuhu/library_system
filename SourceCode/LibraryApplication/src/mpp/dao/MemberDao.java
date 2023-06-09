@@ -9,7 +9,7 @@ import mpp.model.LibraryMember;
 public class MemberDao extends DataAccess {
 	private static MemberDao instance;
 
-	public static MemberDao getInstance() {
+	static MemberDao getInstance() {
 		if (instance == null) {
 			return new MemberDao();
 		}

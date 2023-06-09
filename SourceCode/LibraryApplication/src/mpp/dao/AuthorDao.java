@@ -44,7 +44,7 @@ public class AuthorDao extends DataAccess {
 		return authors;
 	}
 
-	public static AuthorDao getInstance() {
+	static AuthorDao getInstance() {
 		if(instance == null) {
 			return new AuthorDao();
 		}
