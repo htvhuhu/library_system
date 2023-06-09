@@ -82,14 +82,16 @@ public class AddMemberDialog extends JDialog {
 		tfFirstName.setText(data.getFirstName());
 		tfLastName.setText(data.getLastName());
 		tfPhoneNumber.setText(data.getPhoneNumber());
-
+		
 		if (data.getAddress() != null) {
 			tfStreet.setText(data.getAddress().getStreet());
 			tfCity.setText(data.getAddress().getCity());
 			tfState.setText(data.getAddress().getState());
 			tfZipCode.setText(data.getAddress().getZip());
-			isUpdate = true;
+			
 		}
+		isUpdate = true;
+		tfMemberId.enable(false);
 	}
 
 	public void clearFields() {
@@ -103,6 +105,7 @@ public class AddMemberDialog extends JDialog {
 		tfState.setText("");
 		tfZipCode.setText("");
 		isUpdate = false;
+		tfMemberId.enable(true);
 	}
 	
 	private void setupUI() {
