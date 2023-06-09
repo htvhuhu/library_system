@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import javax.swing.DefaultListCellRenderer;
 import java.awt.FlowLayout;
+import mpp.view.librarymember.*;
 
 public class MainWindow extends JFrame {
 
@@ -119,7 +120,7 @@ public class MainWindow extends JFrame {
 
         // Administrator
         // Add Library Member Window
-        ManageLibraryMemberWindow addLibraryMemberWindow = new ManageLibraryMemberWindow();
+        LibraryMemberList addLibraryMemberWindow = new LibraryMemberList(this);
         JPanel addLibraryMemberPanel = addLibraryMemberWindow.getMainPanel();
 
         // Add Book Window

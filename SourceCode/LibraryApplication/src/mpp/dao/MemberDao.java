@@ -6,30 +6,32 @@ import java.util.List;
 
 import mpp.model.LibraryMember;
 
-public class MemberDao extends DataAccess{
-	public ArrayList<LibraryMember> getAllMembers()
-	{
-		
-		//List<LibraryMember> result = new ArrayList<>();
-		Object obj = readFromFile(StorageType.MEMBER);
-		
-		
-		if (obj != null)
-		{
-			LibraryMember[] persons = (LibraryMember[])obj;
-			return new ArrayList<LibraryMember>(Arrays.asList(persons));
-			//return Arrays.as(persons) ;
+public class MemberDao extends DataAccess {
+	private static MemberDao instance;
+
+	public static MemberDao getInstance() {
+		if (instance == null) {
+			return new MemberDao();
 		}
-		
+		return instance;
+	}
+	
+	public ArrayList<LibraryMember> getAllMembers() {
+		Object obj = readFromFile(StorageType.MEMBER);
+
+		if (obj != null) {
+			LibraryMember[] persons = (LibraryMember[]) obj;
+			return new ArrayList<LibraryMember>(Arrays.asList(persons));
+		}
+
 		return new ArrayList<LibraryMember>();
-		
+
 	}
-	
-	public  void saveAllMembers(List<LibraryMember> list)
-	{
-		
+
+	public void saveAllMembers(List<LibraryMember> list) {
+
 		saveToFile(StorageType.MEMBER, list.toArray(new LibraryMember[list.size()]));
-		
+
 	}
-	
+
 }

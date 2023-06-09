@@ -2,57 +2,43 @@ package mpp.service;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import mpp.dao.DataAccessFactory;
 import mpp.dao.MemberDao;
 import mpp.model.LibraryMember;
 
-public class MemberService extends Service{
+public class MemberService extends Service {
+	private MemberDao memberDao = (MemberDao)DataAccessFactory.getDataAccess(MemberDao.class);
 	
 	public static ArrayList<LibraryMember> members;
-	
-	private MemberDao dao;
-	
-	public MemberService()
-	{
-		dao = new MemberDao();
+
+	public MemberService() {
 		if (members == null)
-			members = dao.getAllMembers();
-		//members = new ArrayList<>(); 
+			members = memberDao.getAllMembers();
 	}
-	
-	public void addMember(LibraryMember member)
-	{
-		
+
+	public void addMember(LibraryMember member) {
 		members.add(member);
-		
 	}
-	
-	public void deleteMember(String number)
-	{
-		LibraryMember member = getMember(number);
+
+	public void deleteMember(String memberId) {
+		LibraryMember member = getMember(memberId);
 		if (member != null)
 			members.remove(member);
 	}
-	
-	public void updateMember(LibraryMember member)
-	{		
+
+	public void updateMember(LibraryMember member) {
 		deleteMember(member.getMemberId());
 		addMember(member);
 	}
-	
-	public void save()
-	{
-		dao.saveAllMembers(members);
+
+	public void save() {
+		memberDao.saveAllMembers(members);
 	}
-	
-	public LibraryMember getMember( String number )
-	{
-		/*return members.stream()
-                .filter(member -> member.getMemberId().equals(number))
-                .findFirst()
-                .orElse(null);*/
-		for(LibraryMember mem : members)
-		{
-			if (mem.getMemberId().equals(number) )
+
+	public LibraryMember getMember(String memberId) {
+		for (LibraryMember mem : members) {
+			if (mem.getMemberId().equals(memberId))
 				return mem;
 		}
 		return null;
@@ -62,7 +48,4 @@ public class MemberService extends Service{
 		return members;
 	}
 
-	/*public void setMembers(List<LibraryMember> members) {
-		members = members;
-	}*/
 }

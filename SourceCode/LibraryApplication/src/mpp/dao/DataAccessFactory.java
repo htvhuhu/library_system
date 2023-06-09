@@ -11,9 +11,10 @@ public class DataAccessFactory {
 	private static final Map<Class<? extends DataAccess>, DataAccess> map = new HashMap<>();
 
 	static {
-		map.put(LoginDao.class, new LoginDao());
+		map.put(LoginDao.class, LoginDao.getInstance());
 		map.put(BookDao.class, BookDao.getInstance());
 		map.put(AuthorDao.class, AuthorDao.getInstance());
+		map.put(MemberDao.class, MemberDao.getInstance());
 	}
 
 	public static DataAccess getDataAccess(Class<? extends DataAccess> daoClass) {
