@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import mpp.model.Book;
-import mpp.model.Book;
 
 public class BookDao extends DataAccess {
 	private final StorageType storageType = StorageType.BOOK;

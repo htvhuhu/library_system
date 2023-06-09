@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import mpp.controller.AuthorController;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
@@ -19,6 +21,8 @@ class AuthorWindow extends JFrame implements ActionListener {
 	
 	private List<String> selectedAuthor;
 	private JFrame f;
+	
+	private AuthorController controler = new AuthorController();
 
 	// constructor
 	public AuthorWindow () {
@@ -51,7 +55,8 @@ class AuthorWindow extends JFrame implements ActionListener {
 		gbl_p1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		p1.setLayout(gbl_p1);
 		
-		String[] authors = new String[]{"But", "Lam", "Huan", "Hien"};
+		//String[] authors = new String[]{"But", "Lam", "Huan", "Hien"};
+		String[] authors = controler.getAuthorNameList().toArray(new String[0]);
 		
 		JLabel lblNewLabel = new JLabel("Select author:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
