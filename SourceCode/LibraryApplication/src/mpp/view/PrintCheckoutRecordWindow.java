@@ -57,19 +57,11 @@ public class PrintCheckoutRecordWindow {
 	private void setupUI() {
 		mainPanel = new JPanel();
 		GridBagLayout gbl_mainPanel = new GridBagLayout();
-		gbl_mainPanel.columnWidths = new int[]{189, 72, 0};
+		gbl_mainPanel.columnWidths = new int[]{189, 72, 0, 0};
 		gbl_mainPanel.rowHeights = new int[]{14, 0, 0, 0, 0, 0};
-		gbl_mainPanel.columnWeights = new double[]{0.0, 0.0, 0.0};
+		gbl_mainPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0};
 		gbl_mainPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		mainPanel.setLayout(gbl_mainPanel);
-		
-		JLabel lblTitle = new JLabel("Checkout book");
-		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTitle.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblTitle.gridx = 1;
-		gbc_lblTitle.gridy = 0;
-		mainPanel.add(lblTitle, gbc_lblTitle);
 		
 		JLabel lblNewLabel = new JLabel("Member ID: ");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -88,8 +80,8 @@ public class PrintCheckoutRecordWindow {
 		mainPanel.add(txtMemberId, gbc_txtMemberId);
 		txtMemberId.setColumns(10);
 		
-		JButton btnPrint = new JButton("Print");
-		btnPrint.addActionListener(new ActionListener() {
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String memberId = txtMemberId.getText();
 				
@@ -103,18 +95,32 @@ public class PrintCheckoutRecordWindow {
         		model.updateBooks(bookCopies, checkoutRecords);
 			}
 		});
+		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
+		gbc_btnSearch.anchor = GridBagConstraints.WEST;
+		gbc_btnSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSearch.gridx = 2;
+		gbc_btnSearch.gridy = 1;
+		mainPanel.add(btnSearch, gbc_btnSearch);
+		
+		JButton btnPrint = new JButton("Print");
+		btnPrint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String memberId = txtMemberId.getText();
+				
+				bookController.PrintCheckoutRecord(memberId, bookCopies, checkoutRecords);
+			}
+		});
 		GridBagConstraints gbc_btnPrint = new GridBagConstraints();
-		gbc_btnPrint.anchor = GridBagConstraints.WEST;
+		gbc_btnPrint.anchor = GridBagConstraints.NORTHEAST;
 		gbc_btnPrint.insets = new Insets(0, 0, 5, 0);
-		gbc_btnPrint.gridx = 2;
+		gbc_btnPrint.gridx = 3;
 		gbc_btnPrint.gridy = 1;
 		mainPanel.add(btnPrint, gbc_btnPrint);
 		
 
 		GridBagConstraints gbc_bookTable = new GridBagConstraints();
 		gbc_bookTable.gridheight = 3;
-		gbc_bookTable.insets = new Insets(0, 0, 5, 0);
-		gbc_bookTable.gridwidth = GridBagConstraints.REMAINDER;
+		gbc_bookTable.gridwidth = 4;
 		gbc_bookTable.fill = GridBagConstraints.BOTH;
 		gbc_bookTable.gridx = 0;
 		gbc_bookTable.gridy = 2;

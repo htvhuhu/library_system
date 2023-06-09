@@ -66,18 +66,34 @@ public class BookController {
         List<CheckoutRecord> records = member.getCheckoutRecords();
         return records;
         /*
-        if (records.isEmpty()) {
-            System.out.println("No checkout records found for member " + memberId);
-            return;
-        }
-
-        System.out.printf("%-20s %-20s %-20s%n", "Copy Number", "Checkout Date", "Due Date");
-        for (CheckoutRecord record : records) {
-            System.out.printf("%-20s %-20s %-20s%n", 
-                record.getBookCopy().getBookCopyID(), 
-                record.getCheckoutDate(), 
-                record.getDueDate());
+       
         }*/
+    }
+    
+    public void PrintCheckoutRecord(String memberId, List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
+    	 if (checkoutRecords.isEmpty()) {
+             System.out.println("No checkout records found for member " + memberId);
+             return;
+         }
+
+    	 
+         System.out.printf("\n%-50s %-20s %-20s %-50s %-20s %-20s%n", "Title", "ISBN", "BookCopyID", "Borrower", "Checkout Date", "Due Date");
+         for (BookCopy bookCopy: bookCopies) {
+             var book = bookCopy.getBook();
+             CheckoutRecord checkoutRecord = checkoutRecords.stream()
+             		.filter(cr -> cr.getBookCopy().getBook().getIsbn().compareToIgnoreCase(bookCopy.getBook().getIsbn())==0
+             		&& cr.getBookCopy().getBookCopyID() ==  (bookCopy.getBookCopyID()))
+             		.sorted((cr1, cr2)->cr2.getCheckoutDate().compareTo(cr1.getCheckoutDate()))
+             		.findFirst().orElse(null);
+        	 
+             System.out.printf("%-50s %-20s %-20s %-50s %-20s %-20s%n", 
+            		 book.getTitle(),
+            		 book.getIsbn(),
+            		 checkoutRecord.getBookCopy().getBookCopyID(), 
+            		 memberService.getMember(checkoutRecord.getBorrowerId()) == null ? "N/A" : memberService.getMember(checkoutRecord.getBorrowerId()).toString(),
+            		 checkoutRecord.getCheckoutDate(), 
+            		 checkoutRecord.getDueDate());
+         }
     }
 	
     public List<BookCopy> searchBookCopies(String isbn) {
