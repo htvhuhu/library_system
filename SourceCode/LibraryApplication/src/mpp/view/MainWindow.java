@@ -145,7 +145,8 @@ public class MainWindow extends JFrame {
         JPanel addBookCopyPanel = addBookCopyWindow.getMainPanel();
         
         // Add Book Window
-        AddBookWindow addBookWindow = new AddBookWindow(addBookCopyWindow);
+        AddBookWindow addBookWindow = new AddBookWindow(addBookCopyWindow, 
+        		checkoutWindow, searchBookWindow, printCheckoutRecordWindow);
         JPanel addBookPanel = addBookWindow.getMainPanel();
         
         cards = new JPanel(new CardLayout());

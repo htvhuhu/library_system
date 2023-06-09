@@ -38,9 +38,18 @@ public class AddBookWindow {
 	private JTable tblBook = new JTable();
 	private DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
 	private AddBookCopyWindow addBookCopyWindow;
+	private CheckoutWindow checkoutWindow;
+	private SearchBookWindow searchBookWindow;
+	private PrintCheckoutRecordWindow printCheckoutRecordWindow;
+	
 
-	public AddBookWindow(AddBookCopyWindow addBookCopyWindow) {
+	public AddBookWindow(AddBookCopyWindow addBookCopyWindow, 
+			CheckoutWindow checkoutWindow, SearchBookWindow searchBookWindow,
+			PrintCheckoutRecordWindow printCheckoutRecordWindow) {
 		this.addBookCopyWindow = addBookCopyWindow;
+		this.checkoutWindow = checkoutWindow;
+		this.searchBookWindow = searchBookWindow;
+		this.printCheckoutRecordWindow = printCheckoutRecordWindow;
 		setupUI();
 	}
 
@@ -212,6 +221,9 @@ public class AddBookWindow {
 				//Update book list
 		        fillBookTableData(bookController.getAllBooks());
 		        addBookCopyWindow.fillBookTableData();
+		        searchBookWindow.loadTable(null);
+		        printCheckoutRecordWindow.loadTable(null);
+		        checkoutWindow.loadTable(null);
 			}
 		});
 	}
