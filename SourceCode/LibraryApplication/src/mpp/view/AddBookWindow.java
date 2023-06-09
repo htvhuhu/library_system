@@ -221,7 +221,7 @@ public class AddBookWindow {
 				//TODO: Validate
 				//Update book list
 		        fillBookTableData(bookController.getAllBooks());
-		        
+		        AddBookCopyWindow.fillBookTableData();
 			}
 		});
 	}

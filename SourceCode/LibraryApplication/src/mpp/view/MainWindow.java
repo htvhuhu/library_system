@@ -20,11 +20,16 @@ import mpp.model.Role;
 import javax.swing.DefaultListModel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
 import java.awt.BorderLayout;
 import javax.swing.DefaultListCellRenderer;
 import java.awt.FlowLayout;
 import mpp.view.librarymember.*;
+import java.awt.SystemColor;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 public class MainWindow extends JFrame {
 
@@ -53,7 +58,7 @@ public class MainWindow extends JFrame {
     ListItem addBookCopyItem = new ListItem(Functions.ADD_BOOK_COPY, false);
     
     ListItem logoutItem = new ListItem(Functions.LOG_OUT, true);
-
+    private JLabel lblFunctionTitle;
     
 	/**
 	 * Create the frame.
@@ -84,11 +89,22 @@ public class MainWindow extends JFrame {
 	private void setupMainUI() {
 		JPanel headerPanel = new JPanel();
 		mainPanel.add(headerPanel, BorderLayout.NORTH);
-		headerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-		lblLoginUser = new JLabel("Login user: ");
-		lblLoginUser.setHorizontalAlignment(SwingConstants.RIGHT);
-		headerPanel.add(lblLoginUser);
-		lblLoginUser.setText("Login user: " + loginUser);
+		headerPanel.setLayout(new BorderLayout(0, 0));
+		{
+			lblFunctionTitle = new JLabel("New label");
+			lblFunctionTitle.setForeground(new Color(0, 0, 0));
+			lblFunctionTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+			lblFunctionTitle.setHorizontalAlignment(SwingConstants.CENTER);
+			headerPanel.add(lblFunctionTitle);
+		}
+		{
+			JPanel panel = new JPanel();
+			headerPanel.add(panel, BorderLayout.EAST);
+			lblLoginUser = new JLabel("Login user: ");
+			panel.add(lblLoginUser);
+			lblLoginUser.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblLoginUser.setText("Login user: " + loginUser);
+		}
 		
 		setSize(Functions.MAIN_WINDOW_WIDTH, Functions.MAIN_WINDOW_HEIGHT);
 		setLocationRelativeTo(null);
@@ -98,7 +114,8 @@ public class MainWindow extends JFrame {
 		setupLeftMenu();
 		
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftMenu, cards);
-		splitPane.setDividerLocation(200);
+		splitPane.setBackground(SystemColor.activeCaption);
+		splitPane.setDividerLocation(200);		
 		splitPane.setLeftComponent(leftMenu);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 		
@@ -164,10 +181,13 @@ public class MainWindow extends JFrame {
         }
         model.addElement(logoutItem);
         leftMenu = new JList<>(model);
+        leftMenu.setFont(new Font("Tahoma", Font.BOLD, 14));
+        leftMenu.setForeground(new Color(0, 0, 0));
+        leftMenu.setBackground(new Color(135, 206, 235));
+        
         // selected first item in list
-        int begin = 0;
-        int end = 0;
-        leftMenu.setSelectionInterval(begin, end);
+        leftMenu.setSelectionInterval(0, 0);
+        lblFunctionTitle.setText(leftMenu.getSelectedValue().getItemName());
         leftMenu.setCellRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list,
@@ -194,6 +214,7 @@ public class MainWindow extends JFrame {
             } else {
                 CardLayout cardLayout = (CardLayout) (cards.getLayout());
                 cardLayout.show(cards, value);
+                lblFunctionTitle.setText(value);
             }
         });
 	}
@@ -232,5 +253,7 @@ public class MainWindow extends JFrame {
 
 	public void removeComponent() {
 		mainPanel.removeAll();
+		mainPanel.revalidate();
+		mainPanel.repaint();
     }
 }
