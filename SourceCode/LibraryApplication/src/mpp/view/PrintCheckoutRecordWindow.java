@@ -33,7 +33,7 @@ public class PrintCheckoutRecordWindow {
 
 	public PrintCheckoutRecordWindow() {
 		bookTable = new JTable(new BookTableModel(this.bookCopies, checkoutRecords));
-		loadTable(null);
+		loadTable("fdd");
 		setupUI();
 	}
 

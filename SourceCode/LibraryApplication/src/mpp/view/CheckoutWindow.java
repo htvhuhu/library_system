@@ -62,14 +62,6 @@ public class CheckoutWindow {
 		gbl_mainPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		mainPanel.setLayout(gbl_mainPanel);
 		
-		JLabel lblTitle = new JLabel("Checkout book");
-		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTitle.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblTitle.gridx = 1;
-		gbc_lblTitle.gridy = 0;
-		mainPanel.add(lblTitle, gbc_lblTitle);
-		
 		JLabel lblNewLabel = new JLabel("Member ID: ");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;

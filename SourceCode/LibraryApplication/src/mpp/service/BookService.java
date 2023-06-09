@@ -16,7 +16,6 @@ public class BookService extends Service{
     
     public BookService() {
     	this.books = this.bookDao.getAllBooks();
-    	System.out.println("Created Book Service!");
     }
 
     public BookCopy getAvailableCopy(String isbn) {
