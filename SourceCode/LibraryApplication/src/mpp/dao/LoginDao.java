@@ -5,7 +5,15 @@ import java.util.*;
 import mpp.model.User;
 
 public class LoginDao extends DataAccess {
+	private static LoginDao instance;
 
+	public static LoginDao getInstance() {
+		if (instance == null) {
+			return new LoginDao();
+		}
+		return instance;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Map<String, User> getAllUser() {
 		return (Map<String, User>)readFromFile(StorageType.USER);

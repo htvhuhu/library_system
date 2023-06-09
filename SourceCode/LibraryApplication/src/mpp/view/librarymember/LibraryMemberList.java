@@ -10,8 +10,8 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class LibraryMemberList extends JPanel {
-	private static final long serialVersionUID = -7723999228193594172L;
+public class LibraryMemberList {
+	private JPanel mainPanel;
 	private TablePanel tablePanel;
 	private JButton okBtn;
 	private MemberController controller;
@@ -24,10 +24,11 @@ public class LibraryMemberList extends JPanel {
 		toolbar = new Toolbar();
 		addMember = new AddMember(this, parent);
 
-		setLayout(new BorderLayout());
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
 		tablePanel = new TablePanel();
 		tablePanel.setData(controller.getMembers());
-		add(tablePanel, BorderLayout.CENTER);
+		mainPanel.add(tablePanel, BorderLayout.CENTER);
 
 		okBtn = new JButton("+ Add Member");
 		okBtn.setHorizontalAlignment(SwingConstants.LEFT);
@@ -36,9 +37,9 @@ public class LibraryMemberList extends JPanel {
 		okBtn.setMnemonic(KeyEvent.VK_O);
 
 		// add(okBtn, BorderLayout.NORTH);
-		add(toolbar, BorderLayout.NORTH);
+		mainPanel.add(toolbar, BorderLayout.NORTH);
 
-		btnNewButton = new JButton("New button");
+		btnNewButton = new JButton("Add new member");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addMember.setSize(600, 500);
@@ -48,9 +49,6 @@ public class LibraryMemberList extends JPanel {
 			}
 		});
 		toolbar.add(btnNewButton);
-
-//		setSize(500, 600);
-//		setVisible(true);
 
 		tablePanel.setFormListener(new FormListener() {
 			public void formEventOccurred(FormEvent e, int type) {
@@ -75,4 +73,7 @@ public class LibraryMemberList extends JPanel {
 		tablePanel.refresh();
 	}
 
+	public JPanel getMainPanel() {
+		return mainPanel;
+	}
 }
