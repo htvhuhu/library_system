@@ -6,6 +6,7 @@ import mpp.model.LibraryMember;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -44,6 +45,8 @@ public class AddMemberDialog extends JDialog {
 			}
 		});
 	}
+	
+	
 
 	private void addMember() {
 		String memberId = tfMemberId.getText();
@@ -55,6 +58,17 @@ public class AddMemberDialog extends JDialog {
 		String city = tfCity.getText();
 		String state = tfState.getText();
 		String zipCode = tfZipCode.getText();
+		
+		if (memberId.isEmpty() || firstName.isEmpty() || lastName.isEmpty()
+				|| phone.isEmpty() || street.isEmpty() || city.isEmpty()
+				|| state.isEmpty() || zipCode.isEmpty())
+		{
+			JOptionPane.showMessageDialog(null,
+				    "All fields are required.",
+				    "Warning",
+				    JOptionPane.WARNING_MESSAGE);
+			return;
+		}
 
 		FormEvent ev = new FormEvent(memberId, firstName, lastName, phone, street, city, state, zipCode, this);
 
@@ -110,9 +124,9 @@ public class AddMemberDialog extends JDialog {
 	
 	private void setupUI() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
@@ -123,7 +137,7 @@ public class AddMemberDialog extends JDialog {
 		gbc_lblNewLabel.ipadx = 20;
 		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel.insets = new Insets(20, 20, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridx = 3;
 		gbc_lblNewLabel.gridy = 1;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 
@@ -131,7 +145,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfMemberId = new GridBagConstraints();
 		gbc_tfMemberId.anchor = GridBagConstraints.WEST;
 		gbc_tfMemberId.insets = new Insets(20, 20, 5, 0);
-		gbc_tfMemberId.gridx = 3;
+		gbc_tfMemberId.gridx = 5;
 		gbc_tfMemberId.gridy = 1;
 		getContentPane().add(tfMemberId, gbc_tfMemberId);
 		tfMemberId.setColumns(20);
@@ -141,7 +155,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_1.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_1.gridx = 1;
+		gbc_lblNewLabel_1.gridx = 3;
 		gbc_lblNewLabel_1.gridy = 2;
 		getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 
@@ -150,7 +164,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfFirstName = new GridBagConstraints();
 		gbc_tfFirstName.anchor = GridBagConstraints.WEST;
 		gbc_tfFirstName.insets = new Insets(0, 20, 5, 0);
-		gbc_tfFirstName.gridx = 3;
+		gbc_tfFirstName.gridx = 5;
 		gbc_tfFirstName.gridy = 2;
 		getContentPane().add(tfFirstName, gbc_tfFirstName);
 		tfFirstName.setColumns(20);
@@ -160,7 +174,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_2.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_2.gridx = 1;
+		gbc_lblNewLabel_2.gridx = 3;
 		gbc_lblNewLabel_2.gridy = 3;
 		getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
 
@@ -168,7 +182,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfLastName = new GridBagConstraints();
 		gbc_tfLastName.anchor = GridBagConstraints.WEST;
 		gbc_tfLastName.insets = new Insets(0, 20, 5, 0);
-		gbc_tfLastName.gridx = 3;
+		gbc_tfLastName.gridx = 5;
 		gbc_tfLastName.gridy = 3;
 		getContentPane().add(tfLastName, gbc_tfLastName);
 		tfLastName.setColumns(20);
@@ -178,7 +192,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_3.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_3.gridx = 1;
+		gbc_lblNewLabel_3.gridx = 3;
 		gbc_lblNewLabel_3.gridy = 4;
 		getContentPane().add(lblNewLabel_3, gbc_lblNewLabel_3);
 
@@ -186,7 +200,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfPhoneNumber = new GridBagConstraints();
 		gbc_tfPhoneNumber.anchor = GridBagConstraints.WEST;
 		gbc_tfPhoneNumber.insets = new Insets(0, 20, 5, 0);
-		gbc_tfPhoneNumber.gridx = 3;
+		gbc_tfPhoneNumber.gridx = 5;
 		gbc_tfPhoneNumber.gridy = 4;
 		getContentPane().add(tfPhoneNumber, gbc_tfPhoneNumber);
 		tfPhoneNumber.setColumns(20);
@@ -196,7 +210,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
 		gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_4.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_4.gridx = 1;
+		gbc_lblNewLabel_4.gridx = 3;
 		gbc_lblNewLabel_4.gridy = 5;
 		getContentPane().add(lblNewLabel_4, gbc_lblNewLabel_4);
 
@@ -204,7 +218,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfStreet = new GridBagConstraints();
 		gbc_tfStreet.anchor = GridBagConstraints.WEST;
 		gbc_tfStreet.insets = new Insets(0, 20, 5, 0);
-		gbc_tfStreet.gridx = 3;
+		gbc_tfStreet.gridx = 5;
 		gbc_tfStreet.gridy = 5;
 		getContentPane().add(tfStreet, gbc_tfStreet);
 		tfStreet.setColumns(20);
@@ -214,7 +228,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
 		gbc_lblNewLabel_5.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_5.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_5.gridx = 1;
+		gbc_lblNewLabel_5.gridx = 3;
 		gbc_lblNewLabel_5.gridy = 6;
 		getContentPane().add(lblNewLabel_5, gbc_lblNewLabel_5);
 
@@ -222,7 +236,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfCity = new GridBagConstraints();
 		gbc_tfCity.anchor = GridBagConstraints.WEST;
 		gbc_tfCity.insets = new Insets(0, 20, 5, 0);
-		gbc_tfCity.gridx = 3;
+		gbc_tfCity.gridx = 5;
 		gbc_tfCity.gridy = 6;
 		getContentPane().add(tfCity, gbc_tfCity);
 		tfCity.setColumns(20);
@@ -232,7 +246,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
 		gbc_lblNewLabel_6.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_6.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_6.gridx = 1;
+		gbc_lblNewLabel_6.gridx = 3;
 		gbc_lblNewLabel_6.gridy = 7;
 		getContentPane().add(lblNewLabel_6, gbc_lblNewLabel_6);
 
@@ -240,7 +254,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfState = new GridBagConstraints();
 		gbc_tfState.anchor = GridBagConstraints.WEST;
 		gbc_tfState.insets = new Insets(0, 20, 5, 0);
-		gbc_tfState.gridx = 3;
+		gbc_tfState.gridx = 5;
 		gbc_tfState.gridy = 7;
 		getContentPane().add(tfState, gbc_tfState);
 		tfState.setColumns(20);
@@ -250,7 +264,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
 		gbc_lblNewLabel_7.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_7.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_7.gridx = 1;
+		gbc_lblNewLabel_7.gridx = 3;
 		gbc_lblNewLabel_7.gridy = 8;
 		getContentPane().add(lblNewLabel_7, gbc_lblNewLabel_7);
 
@@ -258,7 +272,7 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_tfZipCode = new GridBagConstraints();
 		gbc_tfZipCode.anchor = GridBagConstraints.WEST;
 		gbc_tfZipCode.insets = new Insets(0, 20, 5, 0);
-		gbc_tfZipCode.gridx = 3;
+		gbc_tfZipCode.gridx = 5;
 		gbc_tfZipCode.gridy = 8;
 		getContentPane().add(tfZipCode, gbc_tfZipCode);
 		tfZipCode.setColumns(20);
@@ -267,13 +281,14 @@ public class AddMemberDialog extends JDialog {
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.anchor = GridBagConstraints.WEST;
 		gbc_panel.insets = new Insets(0, 20, 5, 0);
-		gbc_panel.gridx = 3;
+		gbc_panel.gridx = 5;
 		gbc_panel.gridy = 10;
 		getContentPane().add(panel, gbc_panel);
 
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {		
+		
 				addMember();
 			}
 		});
