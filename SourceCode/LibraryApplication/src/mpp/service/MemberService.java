@@ -30,6 +30,7 @@ public class MemberService extends Service {
 	public void updateMember(LibraryMember member) {
 		deleteMember(member.getMemberId());
 		addMember(member);
+		save();
 	}
 
 	public void save() {

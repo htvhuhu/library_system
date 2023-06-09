@@ -10,7 +10,7 @@ public class Book implements Serializable {
 	private String title;
 	private List<Author> authors;
 	private int maxCheckoutLength;
-	private List<BookCopy> copies;
+	private List<BookCopy> copies = new ArrayList<BookCopy>();
 	
 	public Book(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
 		this.isbn = isbn;

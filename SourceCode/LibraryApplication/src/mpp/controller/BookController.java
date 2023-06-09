@@ -1,6 +1,8 @@
 package mpp.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +24,12 @@ public class BookController {
 		return memberService.getMembers();
 	}
 	
+	public List<LibraryMember> getMember(String memberId) {
+		 return new ArrayList<>(Arrays.asList(memberService.getMember(memberId)));
+	}
+	
 	public String  checkoutBook(String memberId, String isbn) {
-        LibraryMember member = memberService.getMember(memberId);
+        LibraryMember member = this.getMember(memberId).stream().findFirst().orElse(null);
         if (member == null) {
             return "Member not found.";
         }
@@ -70,6 +76,10 @@ public class BookController {
 	
     public List<BookCopy> searchBookCopies(String isbn) {
         return bookService.searchBookCopies(isbn);
+    }
+    
+    public List<BookCopy> getAllBookCopies() {
+        return bookService.searchBookCopies(null);
     }
     
     public Book searchBook(String isbn) {

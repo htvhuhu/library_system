@@ -37,7 +37,7 @@ public class BookService extends Service{
     
     public List<BookCopy> searchBookCopies(String isbn) {
     	try {
-    		 var bookCopies = isbn.isBlank() ? 
+    		 var bookCopies = isbn == null || isbn.isEmpty() ? 
     				 books.stream()
  	                .flatMap(book -> book.getCopies().stream())
     				 : 		books.stream()
@@ -56,7 +56,7 @@ public class BookService extends Service{
     
     public Book searchBook(String isbn) {
     	try {
-    		return isbn.isEmpty() ? 
+    		return isbn == null || isbn.isEmpty() ? 
     				books.stream()
                     .findFirst()
                     .orElse(null)
@@ -102,6 +102,7 @@ public class BookService extends Service{
 	{		
     	deleteBook(book.getIsbn());
 		addBook(book);
+		bookDao.saveBooks(books);
 	}
 	
     public Map<String, Book> getAllBooks() {
