@@ -56,7 +56,7 @@ public class AuthorDao extends DataAccess {
     }
     
 	@SuppressWarnings("unchecked")
-	public Map<String, Author> getAllAuthor() {
+	public Map<String, Author> getAllAuthorMap() {
 		return (Map<String, Author>)readFromFile(StorageType.AUTHOR);
 	}
 	
