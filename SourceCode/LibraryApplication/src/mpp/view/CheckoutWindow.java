@@ -109,7 +109,15 @@ public class CheckoutWindow {
 			public void actionPerformed(ActionEvent e) {
 				String memberId = txtMemberId.getText();
                 String isbn = txtISBN.getText();
+                if (memberId.isBlank()) {
+					JOptionPane.showMessageDialog(mainPanel,"Please input Member ID!!!");
+					return;
+				}
                 
+                if (isbn.isBlank()) {
+					JOptionPane.showMessageDialog(mainPanel,"Please input ISBN!!!");
+					return;
+				}
                 var result = bookController.checkoutBook(memberId, isbn);
                 JOptionPane.showMessageDialog(mainPanel,result);
                 loadTable(null);

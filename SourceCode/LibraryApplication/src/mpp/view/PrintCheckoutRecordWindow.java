@@ -39,7 +39,9 @@ public class PrintCheckoutRecordWindow {
 
 	private void loadTable(String memberId) {
 		this.libraryMembers = memberId == null || memberId.isEmpty() ? bookController.getAllMembers() : bookController.getMember(memberId);
-		this.checkoutRecords = this.libraryMembers.stream()
+		
+		
+		this.checkoutRecords =  this.libraryMembers.stream()
         		.filter(lm -> lm.getCheckoutRecords() != null)
         		.flatMap(lm-> lm.getCheckoutRecords().stream()).toList();
 
@@ -90,6 +92,11 @@ public class PrintCheckoutRecordWindow {
 		btnPrint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String memberId = txtMemberId.getText();
+				
+				if (memberId.isBlank()) {
+					JOptionPane.showMessageDialog(mainPanel,"Please input Member ID!!!");
+					return;
+				}
                 loadTable(memberId);
                 
                 BookTableModel model = (BookTableModel) bookTable.getModel();

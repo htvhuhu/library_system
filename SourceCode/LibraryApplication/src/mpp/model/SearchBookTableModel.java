@@ -1,12 +1,14 @@
 package mpp.model;
 import javax.swing.table.AbstractTableModel;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SearchBookTableModel extends AbstractTableModel {
     private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
-    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Availability","Borrower ID", "Checkout Date", "Due Date" };
+    private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Availability","Borrower ID", "Checkout Date", "Due Date", "Overdue" };
 
     public SearchBookTableModel(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
         this.bookCopies = bookCopies;
@@ -25,6 +27,11 @@ public class SearchBookTableModel extends AbstractTableModel {
         return columnNames[col];
     }
 
+
+    public boolean isCopyOverdue(CheckoutRecord checkoutRecord) {
+        LocalDate today = LocalDate.now();
+        return today.isAfter(checkoutRecord.getDueDate()) && checkoutRecord.getBorrowerId() != null;
+    }
     public Object getValueAt(int row, int col) {
         var bookCopy = bookCopies.get(row);
         var book = bookCopy.getBook();
@@ -41,13 +48,16 @@ public class SearchBookTableModel extends AbstractTableModel {
             case 2:
                 return bookCopy.getBookCopyID();
             case 3:
-                return bookCopy.isAvailable() ? "Available" : "Not Available";
+                return bookCopy.isAvailable() ? "Available" : "N/A";
             case 4:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" : checkoutRecord.getBorrowerId();
+                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" : checkoutRecord.getBorrowerId();
             case 5:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getCheckoutDate();
+                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getCheckoutDate();
             case 6:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getDueDate();
+                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getDueDate();
+            case 7:
+                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ? "N/A" : isCopyOverdue(checkoutRecord) ? "Overdue" : "N/A";
+                
             default:
                 return null;
         }
