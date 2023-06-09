@@ -63,6 +63,6 @@ public class AuthorDao extends DataAccess {
 	public void saveAuthors(List<Author> authorList) {
 		Map<String, Author> authors = new HashMap<>();
 		authorList.forEach(author -> authors.put(author.getAuthorId(), author));
-		saveToFile(StorageType.USER, authors);
+		saveToFile(StorageType.AUTHOR, authors);
 	}
 }
