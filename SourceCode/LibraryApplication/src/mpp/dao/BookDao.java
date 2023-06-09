@@ -37,7 +37,7 @@ public class BookDao extends DataAccess {
     private void loadBooks() {
     	try {
             this.books = (Map<String, Book>)this.readFromFile(this.storageType);
-            this.books = new HashMap<String, Book>();
+            //this.books = new HashMap<String, Book>();
 		} catch (Exception e) {
 			// TODO: handle exception
 			this.books = new HashMap<String, Book>();

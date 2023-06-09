@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Book implements Serializable{
-	private static final long serialVersionUID = 2009215174275387181L;
+	private static final long serialVersionUID = 3840988272604857029L;
 	private String isbn;
 	private String title;
 	private List<Author> authors;
