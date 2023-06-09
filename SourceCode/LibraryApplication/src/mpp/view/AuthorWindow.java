@@ -57,6 +57,9 @@ class AuthorWindow extends JFrame implements ActionListener {
 		
 		//String[] authors = new String[]{"But", "Lam", "Huan", "Hien"};
 		String[] authors = controler.getAuthorNameList().toArray(new String[0]);
+		for (String author: authors) {
+			System.out.println(author);
+		}
 		
 		JLabel lblNewLabel = new JLabel("Select author:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -84,17 +87,17 @@ class AuthorWindow extends JFrame implements ActionListener {
             }
         });
 		
-		JButton btnAdd = new JButton("Add author");
-		btnAdd.addMouseListener(new MouseAdapter() {
+		JButton btnSave = new JButton("Save");
+		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Select author");
 			}
 		});
-		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
-		gbc_btnAdd.gridx = 0;
-		gbc_btnAdd.gridy = 3;
-		p1.add(btnAdd, gbc_btnAdd);
+		GridBagConstraints gbc_btnSave = new GridBagConstraints();
+		gbc_btnSave.gridx = 0;
+		gbc_btnSave.gridy = 3;
+		p1.add(btnSave, gbc_btnSave);
 		f.show();
 		
 		
