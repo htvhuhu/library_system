@@ -222,8 +222,9 @@ public class AddBookWindow {
         DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
         model.setRowCount(0);
         for (Book book : tableData.values()) {
-            Object[] row = {book.getIsbn(), book.getTitle(), book.getCopies().size()};
-            model.addRow(row);
+        	List<String> authorNames = book.getAuthors().stream().map(author -> author.getFirstName() + " " + author.getLastName()).toList();
+            model.addRow(new Object[]{book.getIsbn(), book.getTitle(),
+            		String.join(",", authorNames), book.getMaxCheckoutLength(), book.getCopies().size()});
         }
     }
 	
