@@ -8,4 +8,7 @@ public class Message {
 	public static final String MSG_CONFIRM_REQUIRED_FIELDS = "All fields are required.";
 	
 	public static final String MSG_CONFIRM_DELETE = "Are you sure you want to delete?";
+	public static final String MSG_CONFIRM_ISBN = "ISBN should be 10 or 13 digits";
+
+	public static final String MSG_CONFIRM_ISBN_EXIST = "ISBN is existed";
 }
