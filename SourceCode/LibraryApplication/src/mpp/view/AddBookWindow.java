@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -229,7 +231,30 @@ public class AddBookWindow {
 				    JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
+		String ISBN = txtISBN.getText().trim();
+		if (!validateISBN(ISBN)) {
+			JOptionPane.showMessageDialog(null,
+					Message.MSG_CONFIRM_ISBN,
+				    "Warning",
+				    JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		if (bookController.getAllBooks().containsKey(ISBN)) {
+			JOptionPane.showMessageDialog(null,
+					Message.MSG_CONFIRM_ISBN_EXIST,
+				    "Warning",
+				    JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		
 		return true;
+	}
+	
+	public boolean validateISBN(String string) {
+		String pattern = "^\\d{10}$|^\\d{13}$";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(string);
+        return matcher.matches();
 	}
 
 	private void fillBookTableData(Map<String, Book> tableData) {
