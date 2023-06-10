@@ -150,11 +150,11 @@ public class AddBookWindow {
 		btnAddAuthor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// System.out.println("Add author")
+				listSelectedAuthor.removeAll();
+				selectedAuthors.clear();
 				listSelectedAuthor.setListData(listAuthor.getSelectedValues());
 				for (Object o : listAuthor.getSelectedValues()) {
 					String s = o.toString();
-					System.out.println("Selected author name:" + s);
 					selectedAuthors.add(authorController.getAuthorByName(s));
 				}
 			}
@@ -163,7 +163,7 @@ public class AddBookWindow {
 		JButton btnAddBook = new JButton("Add Book");
 
 		GridBagConstraints gbc_btnAddBook = new GridBagConstraints();
-		gbc_btnAddBook.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnAddBook.anchor = GridBagConstraints.WEST;
 		gbc_btnAddBook.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAddBook.gridx = 2;
 		gbc_btnAddBook.gridy = 5;
