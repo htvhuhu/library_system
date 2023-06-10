@@ -47,13 +47,13 @@ public class SearchBookTableModel extends AbstractTableModel {
             case 2:
                 return bookCopy.getBookCopyID();
             case 3:
-                return bookCopy.isAvailable() ? "Available" : "N/A";
+                return bookCopy.isAvailable() ? "Available" : "Unavailable";
            case 4:
-                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getCheckoutDate();
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getCheckoutDate();
             case 5:
-                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getDueDate();
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getDueDate();
             case 6:
-                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ? "N/A" : isCopyOverdue(checkoutRecord) ? "Overdue" : "N/A";
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ? "" : isCopyOverdue(checkoutRecord) ? "Overdue" : "N/A";
                 
             default:
                 return null;

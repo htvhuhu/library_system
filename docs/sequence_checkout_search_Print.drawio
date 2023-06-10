@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-10T14:57:30.714Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="QyPXmRtRpHlljFhF0kMM" version="21.3.8" type="google">
+<mxfile host="app.diagrams.net" modified="2023-06-10T16:00:08.668Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="mDrRTC09GXzOE6An5uEe" version="21.3.8" type="google">
   <diagram name="Page-1" id="nFVnYy6WFyr9DjGuqM5j">
     <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -18,10 +18,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Z2h3FojYNCB5ntAbKMzf-3" value=":BookController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
-          <mxGeometry x="110" y="60" width="100" height="290" as="geometry" />
+          <mxGeometry x="110" y="60" width="100" height="340" as="geometry" />
         </mxCell>
         <mxCell id="Z2h3FojYNCB5ntAbKMzf-13" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="Z2h3FojYNCB5ntAbKMzf-3">
-          <mxGeometry x="50" y="50" width="10" height="230" as="geometry" />
+          <mxGeometry x="50" y="50" width="10" height="290" as="geometry" />
         </mxCell>
         <mxCell id="Z2h3FojYNCB5ntAbKMzf-4" value=":BookService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
           <mxGeometry x="240" y="60" width="100" height="300" as="geometry" />
@@ -33,10 +33,13 @@
           <mxGeometry x="50" y="230" width="10" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Z2h3FojYNCB5ntAbKMzf-5" value=":MemberService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
-          <mxGeometry x="480" y="60" width="100" height="300" as="geometry" />
+          <mxGeometry x="480" y="60" width="100" height="340" as="geometry" />
         </mxCell>
         <mxCell id="Z2h3FojYNCB5ntAbKMzf-16" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="Z2h3FojYNCB5ntAbKMzf-5">
           <mxGeometry x="50" y="70" width="10" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="oRmf1eYiWkKij-Ca8apr-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="Z2h3FojYNCB5ntAbKMzf-5">
+          <mxGeometry x="50" y="280" width="10" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Z2h3FojYNCB5ntAbKMzf-6" value=":BookDao" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
           <mxGeometry x="360" y="60" width="100" height="300" as="geometry" />
@@ -454,6 +457,21 @@
         </mxCell>
         <mxCell id="UYIfUHxF1EwTp51lZbPo-64" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="645" y="-692" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oRmf1eYiWkKij-Ca8apr-1" value="11.&amp;nbsp;.updateMember(&lt;span style=&quot;font-family: Consolas; font-size: 10pt; color: rgb(106, 62, 62);&quot;&gt;member&lt;/span&gt;&lt;span style=&quot;background-color: rgb(232, 242, 254); font-family: Consolas; font-size: 10pt;&quot;&gt;)&lt;/span&gt;&lt;div style=&quot;padding: 0px 0px 0px 2px;&quot;&gt;&lt;div style=&quot;font-family: Consolas; font-size: 10pt;&quot;&gt;&lt;p style=&quot;background-color:#e8f2fe;margin:0;&quot;&gt;&lt;span style=&quot;color:#0000c0;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1" target="Z2h3FojYNCB5ntAbKMzf-5">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="170" y="342" as="sourcePoint" />
+            <mxPoint x="290" y="342" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oRmf1eYiWkKij-Ca8apr-3" value="12. saveToFile(StorageType.Member, members)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="540" y="349" as="sourcePoint" />
+            <mxPoint x="790" y="351" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oRmf1eYiWkKij-Ca8apr-4" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="789" y="350" width="10" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
