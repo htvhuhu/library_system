@@ -27,9 +27,9 @@ public class CheckoutWindow {
 	JPanel mainPanel;
 	JTextField txtMemberId;
 	JTextField txtISBN;
-	private List<BookCopy> bookCopies;
+	List<BookCopy> bookCopies;
 	JTable bookTable;
-	private List<LibraryMember> libraryMembers;
+	List<LibraryMember> libraryMembers;
 	List<CheckoutRecord> checkoutRecords;
 	
 	public CheckoutWindow() {

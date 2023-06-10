@@ -44,13 +44,15 @@ public class BookController {
             return "Book not found or no available copies.";
         }
 
+        
+
+        copy.updateAvailable(false);
+        bookService.updateBook(copy.getBook());
+
         CheckoutRecord record = new CheckoutRecord(copy, LocalDate.now(), LocalDate.now().plusDays(copy.getBook().getMaxCheckoutLength()), memberId);
         member.getCheckoutRecords().add(record);
         memberService.updateMember(member);
         
-        copy.updateAvailable(false);
-        bookService.updateBook(copy.getBook());
-
         return "Checkout successful! Due date: " + record.getDueDate();
     }
 	
