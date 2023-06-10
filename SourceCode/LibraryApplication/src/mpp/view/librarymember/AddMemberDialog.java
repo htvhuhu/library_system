@@ -50,7 +50,17 @@ public class AddMemberDialog extends JDialog {
 		});
 	}
 	
-	
+	private static boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        double d = Double.parseDouble(strNum);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
 
 	private void addMember() {
 		String memberId = tfMemberId.getText();
@@ -69,6 +79,24 @@ public class AddMemberDialog extends JDialog {
 		{
 			JOptionPane.showMessageDialog(null,
 					Message.MSG_CONFIRM_REQUIRED_FIELDS,
+				    "Warning",
+				    JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		
+		if (!isNumeric(phone))
+		{
+			JOptionPane.showMessageDialog(null,
+					Message.MSG_PHONE_NUMBER,
+				    "Warning",
+				    JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		
+		if (!isNumeric(zipCode))
+		{
+			JOptionPane.showMessageDialog(null,
+					Message.MSG_ZIPCODE_NUMBER,
 				    "Warning",
 				    JOptionPane.WARNING_MESSAGE);
 			return;
@@ -207,21 +235,8 @@ public class AddMemberDialog extends JDialog {
 		gbc_tfPhoneNumber.gridx = 5;
 		gbc_tfPhoneNumber.gridy = 4;
 		getContentPane().add(tfPhoneNumber, gbc_tfPhoneNumber);
-		tfPhoneNumber.setColumns(20);
+		tfPhoneNumber.setColumns(20);	
 		
-		tfPhoneNumber.addKeyListener(new KeyAdapter() {
-	         public void keyPressed(KeyEvent ke) {
-	            String value = tfPhoneNumber.getText();
-	            int l = value.length();
-	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
-	            	tfPhoneNumber.setEditable(true);
-	               //label.setText("");
-	            } else {
-	            	tfPhoneNumber.setEditable(false);
-	               //label.setText("* Enter only numeric digits(0-9)");
-	            }
-	         }
-	      });
 
 		JLabel lblNewLabel_4 = new JLabel("Street");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
@@ -293,22 +308,9 @@ public class AddMemberDialog extends JDialog {
 		gbc_tfZipCode.gridx = 5;
 		gbc_tfZipCode.gridy = 8;
 		getContentPane().add(tfZipCode, gbc_tfZipCode);
-		tfZipCode.setColumns(20);
+		tfZipCode.setColumns(20);	
 		
 		
-		tfZipCode.addKeyListener(new KeyAdapter() {
-	         public void keyPressed(KeyEvent ke) {
-	            String value = tfZipCode.getText();
-	            int l = value.length();
-	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
-	            	tfZipCode.setEditable(true);
-	               
-	            } else {
-	            	tfZipCode.setEditable(false);
-	               
-	            }
-	         }
-	      });
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
