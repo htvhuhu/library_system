@@ -46,11 +46,11 @@ public class BookTableModel extends AbstractTableModel {
             case 2:
                 return bookCopy.getBookCopyID();
             case 3:
-                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" : memberService.getMember(checkoutRecord.getBorrowerId()).toString();
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" : memberService.getMember(checkoutRecord.getBorrowerId()).toString();
             case 4:
-                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getCheckoutDate();
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getCheckoutDate();
             case 5:
-                return bookCopy.isAvailable() ? "N/A": checkoutRecord == null ?"N/A" :checkoutRecord.getDueDate();
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getDueDate();
             default:
                 return null;
         }
