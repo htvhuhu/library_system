@@ -21,16 +21,12 @@ public class LibraryMemberTableModel extends AbstractTableModel {
 	public LibraryMemberTableModel() {
 	}
 	
-	
-	
 	@Override
 	public String getColumnName(int column) {
 		// TODO Auto-generated method stub
 		return colNames[column];
 	}
-
-
-
+	
 	public void setData(List<LibraryMember> db) {
 		this.db = db;
 	}
@@ -61,7 +57,6 @@ public class LibraryMemberTableModel extends AbstractTableModel {
 		case 4:
 			return member.getAddress().toString();
 		}
-		
 		return null;
 	}
 

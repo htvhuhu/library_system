@@ -17,10 +17,6 @@ import javax.swing.JTable;
 import mpp.model.LibraryMember;
 
 public class TablePanel extends JPanel {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private LibraryMemberTableModel tableModel;
@@ -50,17 +46,12 @@ public class TablePanel extends JPanel {
 			}
 		});
 		
-		
 		removeItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				tableModel.fireTableRowsDeleted(row, row);
-				/*if(personTableListener != null) {
-					personTableListener.rowDeleted(row);
-					tableModel.fireTableRowsDeleted(row, row);
-				}*/
-				String number = table.getModel().getValueAt(row, 0).toString();
-				FormEvent ev = new FormEvent(number, this);
+				String memberId = table.getModel().getValueAt(row, 0).toString();
+				FormEvent ev = new FormEvent(memberId, this);
 
 				if (formListener != null) {
 					formListener.formEventOccurred(ev, 1);
@@ -72,10 +63,6 @@ public class TablePanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				tableModel.fireTableRowsDeleted(row, row);
-				/*if(personTableListener != null) {
-					personTableListener.rowDeleted(row);
-					tableModel.fireTableRowsDeleted(row, row);
-				}*/
 				String number = table.getModel().getValueAt(row, 0).toString();
 				FormEvent ev = new FormEvent(number, this);
 
