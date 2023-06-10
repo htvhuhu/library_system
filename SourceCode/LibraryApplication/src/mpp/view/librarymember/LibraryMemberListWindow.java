@@ -65,7 +65,7 @@ public class LibraryMemberListWindow {
 	
 	private int confirmDelete() {
 		return JOptionPane.showConfirmDialog(this.mainPanel, 
-				Message.MSG_CONFIRM_LOGOUT, 
+				Message.MSG_CONFIRM_DELETE, 
 				Message.MSG_CONFIRM_TITLE,
 				JOptionPane.YES_NO_OPTION);
 		
