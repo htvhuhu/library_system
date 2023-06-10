@@ -24,17 +24,14 @@ public class AuthorDao extends DataAccess {
         return new ArrayList<Author>(this.authors.values());
     }
 
-    public void updateAuthor(Author author) {
-        //addAuthor(author);
-    }
-
     public void deleteAuthor(String isbn) {
         this.authors.remove(isbn);
         this.saveToFile(this.storageType, authors);
         this.loadAuthors();
     }
 
-    private void loadAuthors() {
+    @SuppressWarnings("unchecked")
+	private void loadAuthors() {
         this.authors = (Map<String, Author>)this.readFromFile(this.storageType);
     }
     

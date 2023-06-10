@@ -16,7 +16,6 @@ import mpp.model.BookCopy;
 import mpp.model.BookTableModel;
 import mpp.model.CheckoutRecord;
 import mpp.model.LibraryMember;
-import mpp.model.SearchBookTableModel;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
