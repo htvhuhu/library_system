@@ -103,10 +103,12 @@ public class AddBookCopyWindow {
 		btnCopy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				bookController.addCopy(selectedValue);
-				copyModel.fireTableDataChanged();
-				
-				fillCopyBookTable();
+				if (selectedValue != null && !selectedValue.isEmpty()) {
+					bookController.addCopy(selectedValue);
+					copyModel.fireTableDataChanged();
+					
+					fillCopyBookTable();
+				}
 			}
 		});
 		GridBagConstraints gbc_btnCopy = new GridBagConstraints();
