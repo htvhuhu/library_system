@@ -53,7 +53,7 @@ public class SearchBookTableModel extends AbstractTableModel {
             case 5:
                 return bookCopy.isAvailable() ? "": checkoutRecord == null ?"" :checkoutRecord.getDueDate();
             case 6:
-                return bookCopy.isAvailable() ? "": checkoutRecord == null ? "" : isCopyOverdue(checkoutRecord) ? "Overdue" : "N/A";
+                return bookCopy.isAvailable() ? "": checkoutRecord == null ? "" : isCopyOverdue(checkoutRecord) ? "Overdue" : "";
                 
             default:
                 return null;
