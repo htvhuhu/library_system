@@ -259,7 +259,7 @@ public class AddBookWindow {
 
 	private void fillBookTableData(Map<String, Book> tableData) {
 		model.addRow(new Object[] { "ISBN", "Title", "Authors", "Max Checkout", "Number of Copies" });
-		System.out.println("Get books recods :" + tableData.size());
+//		System.out.println("Get books recods :" + tableData.size());
 		DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
 		model.setRowCount(0);
 		for (Book book : tableData.values()) {

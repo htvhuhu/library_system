@@ -111,12 +111,12 @@ public class BookController {
     
 	public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
         bookService.addBook(isbn, title, maxCheckoutLength, authors);
-        System.out.println("Book added successfully!");
+//        System.out.println("Book added successfully!");
     }
 	
 	public void addCopy(String isbn) {
 		bookService.addCopyToBook(isbn);
-        System.out.println("Copy added successfully!");
+//        System.out.println("Copy added successfully!");
     }
 	
 	public Map<String, Book> getAllBooks() {
