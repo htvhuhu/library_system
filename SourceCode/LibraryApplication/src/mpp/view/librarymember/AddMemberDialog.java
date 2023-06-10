@@ -15,6 +15,8 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 public class AddMemberDialog extends JDialog {
@@ -206,6 +208,20 @@ public class AddMemberDialog extends JDialog {
 		gbc_tfPhoneNumber.gridy = 4;
 		getContentPane().add(tfPhoneNumber, gbc_tfPhoneNumber);
 		tfPhoneNumber.setColumns(20);
+		
+		tfPhoneNumber.addKeyListener(new KeyAdapter() {
+	         public void keyPressed(KeyEvent ke) {
+	            String value = tfPhoneNumber.getText();
+	            int l = value.length();
+	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
+	            	tfPhoneNumber.setEditable(true);
+	               //label.setText("");
+	            } else {
+	            	tfPhoneNumber.setEditable(false);
+	               //label.setText("* Enter only numeric digits(0-9)");
+	            }
+	         }
+	      });
 
 		JLabel lblNewLabel_4 = new JLabel("Street");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
@@ -278,6 +294,21 @@ public class AddMemberDialog extends JDialog {
 		gbc_tfZipCode.gridy = 8;
 		getContentPane().add(tfZipCode, gbc_tfZipCode);
 		tfZipCode.setColumns(20);
+		
+		
+		tfZipCode.addKeyListener(new KeyAdapter() {
+	         public void keyPressed(KeyEvent ke) {
+	            String value = tfZipCode.getText();
+	            int l = value.length();
+	            if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') {
+	            	tfZipCode.setEditable(true);
+	               
+	            } else {
+	            	tfZipCode.setEditable(false);
+	               
+	            }
+	         }
+	      });
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
