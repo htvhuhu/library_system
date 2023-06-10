@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,9 +26,7 @@ import mpp.model.BookCopy;
 public class AddBookCopyWindow {
 	
 	private static BookController bookController = new BookController();
-	//private AuthorController authorController = new AuthorController();
 	private JPanel mainPanel;
-	//private List<Author> selectedAuthors = new ArrayList<>();
 	private JTable tblBook = new JTable();
 	private DefaultTableModel model = (DefaultTableModel) tblBook.getModel();
 	public DefaultTableModel getModel() {
@@ -48,7 +47,7 @@ public class AddBookCopyWindow {
 		gbl_mainPanel.columnWidths = new int[]{121, 40, 125, 42, 58, 150, 0};
 		gbl_mainPanel.rowHeights = new int[]{26, 26, 0, 26, 26, 29, 29, 0};
 		gbl_mainPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_mainPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_mainPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		mainPanel.setLayout(gbl_mainPanel);
 
         // Add columns to the model
@@ -69,14 +68,14 @@ public class AddBookCopyWindow {
 		mainPanel.add(lblBookList, gbc_lblBookList);
 				
 		// Create a scroll pane and add the table to it
-        //JScrollPane scrollPane = new JScrollPane(tblBook);
+        JScrollPane scrollPane = new JScrollPane(tblBook);
 		GridBagConstraints gbc_tblBook = new GridBagConstraints();
 		gbc_tblBook.gridwidth = 6;
 		gbc_tblBook.insets = new Insets(0, 0, 5, 0);
 		gbc_tblBook.fill = GridBagConstraints.BOTH;
 		gbc_tblBook.gridx = 0;
 		gbc_tblBook.gridy = 1;
-		mainPanel.add(tblBook, gbc_tblBook);
+		mainPanel.add(scrollPane, gbc_tblBook);
 		
 				tblBook.getSelectionModel().addListSelectionListener((ListSelectionListener) new ListSelectionListener() {
 		            @Override
@@ -86,19 +85,19 @@ public class AddBookCopyWindow {
 		
 		                    // Do something with the selected data
 		                    selectedValue = tblBook.getValueAt(selectedRow, 0).toString();
-		                    //System.out.println("Selected value: " + selectedValue);
 		                    fillCopyBookTable();
 		                }
 		            }
 		        });
 		
+		JScrollPane scrollPaneCopy = new JScrollPane(tbCopy);
 		GridBagConstraints gbc_tbCopy = new GridBagConstraints();
 		gbc_tbCopy.gridwidth = 5;
 		gbc_tbCopy.insets = new Insets(0, 0, 5, 5);
 		gbc_tbCopy.fill = GridBagConstraints.BOTH;
 		gbc_tbCopy.gridx = 0;
 		gbc_tbCopy.gridy = 4;
-		mainPanel.add(tbCopy, gbc_tbCopy);
+		mainPanel.add(scrollPaneCopy, gbc_tbCopy);
 		
 		JButton btnCopy = new JButton("Add copy");
 		btnCopy.addMouseListener(new MouseAdapter() {
@@ -142,7 +141,6 @@ public class AddBookCopyWindow {
 		if (book != null) {
 			List<BookCopy> copyList = book.getCopies();
 			if (!copyList.isEmpty()) {				
-				copyModel.addRow(new Object[] {"Copy Number", "Available"});
 		        for (BookCopy copy : copyList) {
 		            Object[] row = {copy.getBookCopyID(), copy.isAvailable()};
 		            copyModel.addRow(row);
@@ -153,10 +151,8 @@ public class AddBookCopyWindow {
 	
 	public void fillBookTableData() {
         model.setRowCount(0);
-		//System.out.println("[fillBookTableData] Get books recods :");
         Map<String, Book> books = bookController.getAllBooks();
-        //System.out.println("Get all books " + books.size());
-        model.addRow(new Object[] {"ISBN", "Title", "Max Checkout", "Number of Copies"});
+
         for (Entry<String, Book> entry: books.entrySet()) {
         	System.out.print("Book: " + entry.getKey() + " " + entry.getValue().getTitle());
         	Book book = entry.getValue();
