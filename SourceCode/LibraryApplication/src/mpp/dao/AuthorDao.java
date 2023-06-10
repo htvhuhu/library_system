@@ -34,7 +34,8 @@ public class AuthorDao extends DataAccess {
         this.loadAuthors();
     }
 
-    private void loadAuthors() {
+    @SuppressWarnings("unchecked")
+	private void loadAuthors() {
         this.authors = (Map<String, Author>)this.readFromFile(this.storageType);
     }
     

@@ -20,16 +20,12 @@ import mpp.model.Role;
 import javax.swing.DefaultListModel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
 import java.awt.BorderLayout;
 import javax.swing.DefaultListCellRenderer;
-import java.awt.FlowLayout;
 import mpp.view.librarymember.*;
 import java.awt.SystemColor;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 
 public class MainWindow extends JFrame {
 
@@ -150,14 +146,26 @@ public class MainWindow extends JFrame {
         JPanel addBookPanel = addBookWindow.getMainPanel();
         
         cards = new JPanel(new CardLayout());
-		// Librarian
-        cards.add(checkoutPanel, checkoutItem.getItemName());
-        cards.add(searchBookPanel, searchBookItem.getItemName());
-        cards.add(printCheckoutRecordPanel, printCheckoutRecordItem.getItemName());
-        // Administrator
-        cards.add(addLibraryMemberPanel, addManageLibraryMemberItem.getItemName());
-        cards.add(addBookPanel, addBookItem.getItemName());
-        cards.add(addBookCopyPanel, addBookCopyItem.getItemName());
+        if (role == Role.LIBRARIAN) {
+        	// Librarian
+            cards.add(checkoutPanel, checkoutItem.getItemName());
+            cards.add(searchBookPanel, searchBookItem.getItemName());
+            cards.add(printCheckoutRecordPanel, printCheckoutRecordItem.getItemName());
+        }  else if (role == Role.ADMIN) {
+        	// Administrator
+            cards.add(addLibraryMemberPanel, addManageLibraryMemberItem.getItemName());
+            cards.add(addBookPanel, addBookItem.getItemName());
+            cards.add(addBookCopyPanel, addBookCopyItem.getItemName());
+        } else {
+        	// Librarian
+            cards.add(checkoutPanel, checkoutItem.getItemName());
+            cards.add(searchBookPanel, searchBookItem.getItemName());
+            cards.add(printCheckoutRecordPanel, printCheckoutRecordItem.getItemName());
+        	// Administrator
+            cards.add(addLibraryMemberPanel, addManageLibraryMemberItem.getItemName());
+            cards.add(addBookPanel, addBookItem.getItemName());
+            cards.add(addBookCopyPanel, addBookCopyItem.getItemName());
+        }
 
 	}
 	

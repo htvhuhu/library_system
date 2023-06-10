@@ -6,7 +6,8 @@ import mpp.service.MemberService;
 import java.util.List;
 
 public class BookTableModel extends AbstractTableModel {
-    private List<BookCopy> bookCopies;
+	private static final long serialVersionUID = 6119611072961292821L;
+	private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
     private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Member Name", "Checkout Date", "Due Date" };
     private MemberService memberService = new MemberService();

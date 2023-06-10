@@ -3,10 +3,10 @@ import javax.swing.table.AbstractTableModel;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SearchBookTableModel extends AbstractTableModel {
-    private List<BookCopy> bookCopies;
+	private static final long serialVersionUID = 467637172910751563L;
+	private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
     private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Availability","Checkout Date", "Due Date", "Overdue" };
 
@@ -26,7 +26,6 @@ public class SearchBookTableModel extends AbstractTableModel {
     public String getColumnName(int col) {
         return columnNames[col];
     }
-
 
     public boolean isCopyOverdue(CheckoutRecord checkoutRecord) {
         LocalDate today = LocalDate.now();
