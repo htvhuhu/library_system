@@ -11,10 +11,6 @@ import mpp.view.librarymember.FormEvent;
 public class MemberController {
 	private MemberService service = (MemberService) ServiceFactory.getService(MemberService.class);
 
-	public MemberController() {
-		service = new MemberService();
-	}
-
 	public void saveMember(FormEvent ev, int type) {
 		if (type == 0) {
 			Address address = new Address(ev.getStreet(), ev.getCity(), ev.getState(), ev.getZipCode());

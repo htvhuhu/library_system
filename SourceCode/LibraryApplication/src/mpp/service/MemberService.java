@@ -12,7 +12,8 @@ public class MemberService extends Service {
 	
 	public static ArrayList<LibraryMember> members;
 
-	public MemberService() {
+	// package level
+	MemberService() {
 		if (members == null)
 			members = memberDao.getAllMembers();
 	}

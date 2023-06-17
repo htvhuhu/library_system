@@ -9,6 +9,10 @@ import mpp.model.LibraryMember;
 public class MemberDao extends DataAccess {
 	private static MemberDao instance;
 
+	// package level
+	MemberDao() {
+	}
+	
 	static MemberDao getInstance() {
 		if (instance == null) {
 			return new MemberDao();
@@ -23,15 +27,12 @@ public class MemberDao extends DataAccess {
 			LibraryMember[] persons = (LibraryMember[]) obj;
 			return new ArrayList<LibraryMember>(Arrays.asList(persons));
 		}
-
 		return new ArrayList<LibraryMember>();
 
 	}
 
 	public void saveAllMembers(List<LibraryMember> list) {
-
 		saveToFile(StorageType.MEMBER, list.toArray(new LibraryMember[list.size()]));
-
 	}
 
 }

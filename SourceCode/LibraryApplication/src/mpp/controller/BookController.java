@@ -17,8 +17,7 @@ import mpp.service.ServiceFactory;
 
 public class BookController {
 	private BookService bookService = (BookService) ServiceFactory.getService(BookService.class);
-	private MemberService memberService = new MemberService();
-	
+	private MemberService memberService = (MemberService) ServiceFactory.getService(MemberService.class);
 
 	public List<LibraryMember> getAllMembers() {
 		return memberService.getMembers();

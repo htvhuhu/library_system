@@ -2,6 +2,7 @@ package mpp.model;
 import javax.swing.table.AbstractTableModel;
 
 import mpp.service.MemberService;
+import mpp.service.ServiceFactory;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class BookTableModel extends AbstractTableModel {
 	private List<BookCopy> bookCopies;
     private List<CheckoutRecord> checkoutRecords;
     private String[] columnNames = {"Title", "ISBN", "BookCopyID", "Member Name", "Checkout Date", "Due Date" };
-    private MemberService memberService = new MemberService();
+    private MemberService memberService = (MemberService) ServiceFactory.getService(MemberService.class);
 
     public BookTableModel(List<BookCopy> bookCopies, List<CheckoutRecord> checkoutRecords) {
         this.bookCopies = bookCopies;

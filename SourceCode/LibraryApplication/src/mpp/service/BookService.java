@@ -4,7 +4,6 @@ import java.util.Map;
 
 import mpp.dao.BookDao;
 import mpp.dao.DataAccessFactory;
-import mpp.dao.LoginDao;
 import mpp.model.Author;
 import mpp.model.Book;
 import mpp.model.BookCopy;
@@ -14,7 +13,8 @@ public class BookService extends Service{
 	
     private List<Book> books;
     
-    public BookService() {
+    // package level
+    BookService() {
     	this.books = this.bookDao.getAllBooks();
     }
 

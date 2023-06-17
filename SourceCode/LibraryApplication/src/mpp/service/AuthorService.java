@@ -13,6 +13,10 @@ public class AuthorService extends Service {
 	
 	private AuthorDao authorDao = (AuthorDao) DataAccessFactory.getDataAccess(AuthorDao.class);
 
+	// package level
+	AuthorService() {
+	}
+	
 	public List<Author> getAuthors() {
 		Map<String, Author> authorMap = authorDao.getAllAuthorMap();
 		List<Author> authors = new ArrayList<>();

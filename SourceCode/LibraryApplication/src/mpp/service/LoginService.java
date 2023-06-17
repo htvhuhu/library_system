@@ -13,6 +13,10 @@ import mpp.model.User;
 public class LoginService extends Service {
 	private LoginDao loginDao = (LoginDao)DataAccessFactory.getDataAccess(LoginDao.class);
 	
+	// package level
+	LoginService() {		
+	}
+	
 	public Role login(String username, char[] password) throws LoginException {
 		Map<String, User> map = loginDao.getAllUser();
 		// implementation

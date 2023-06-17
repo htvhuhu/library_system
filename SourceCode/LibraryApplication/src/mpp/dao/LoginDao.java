@@ -7,6 +7,10 @@ import mpp.model.User;
 public class LoginDao extends DataAccess {
 	private static LoginDao instance;
 
+	// package level
+	LoginDao() {
+	}
+		
 	static LoginDao getInstance() {
 		if (instance == null) {
 			return new LoginDao();
