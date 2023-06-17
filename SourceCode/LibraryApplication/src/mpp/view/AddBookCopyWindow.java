@@ -62,6 +62,7 @@ public class AddBookCopyWindow {
 
 		JLabel lblBookList = new JLabel("Book List");
 		GridBagConstraints gbc_lblBookList = new GridBagConstraints();
+		gbc_lblBookList.anchor = GridBagConstraints.WEST;
 		gbc_lblBookList.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBookList.gridx = 0;
 		gbc_lblBookList.gridy = 0;
@@ -110,6 +111,7 @@ public class AddBookCopyWindow {
 			}
 		});
 		GridBagConstraints gbc_btnCopy = new GridBagConstraints();
+		gbc_btnCopy.anchor = GridBagConstraints.WEST;
 		gbc_btnCopy.insets = new Insets(0, 0, 5, 0);
 		gbc_btnCopy.gridx = 5;
 		gbc_btnCopy.gridy = 4;

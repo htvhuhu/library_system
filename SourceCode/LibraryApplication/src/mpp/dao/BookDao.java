@@ -24,22 +24,17 @@ public class BookDao extends DataAccess {
         return new ArrayList<Book>(this.books.values());
     }
 
-    public void updateBook(Book book) {
-        //addBook(book);
-    }
-
     public void deleteBook(String isbn) {
         this.books.remove(isbn);
         this.saveToFile(this.storageType, books);
         this.loadBooks();
     }
 
-    private void loadBooks() {
+    @SuppressWarnings("unchecked")
+	private void loadBooks() {
     	try {
             this.books = (Map<String, Book>)this.readFromFile(this.storageType);
-            //this.books = new HashMap<String, Book>();
 		} catch (Exception e) {
-			// TODO: handle exception
 			this.books = new HashMap<String, Book>();
 		}
     }
